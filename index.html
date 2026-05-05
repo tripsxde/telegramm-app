@@ -6,174 +6,111 @@
     <script src="https://telegram.org"></script>
     <style>
         body { font-family: sans-serif; background-color: #17212b; color: #ffffff; margin: 0; padding: 0; overflow-x: hidden; }
-        .page { display: none; padding-bottom: 80px; animation: fadeIn 0.2s ease; }
+        .page { display: none; padding-bottom: 80px; }
         .active-page { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        .top-bar { padding: 15px; display: flex; justify-content: space-between; align-items: center; background-color: #17212b; }
-        
-        /* БАННЕР */
-        .banner-container { width: 100%; height: auto; cursor: pointer; background-color: #ffffff; border-bottom: 2px solid #242f3d; }
+        .top-bar { padding: 15px; display: flex; justify-content: space-between; align-items: center; background-color: #17212b; border-bottom: 1px solid #242f3d; }
+        .banner-container { width: 100%; cursor: pointer; background: #fff; }
         .banner-img { width: 100%; display: block; height: auto; }
-
-        /* ВИТРИНА */
         .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px; }
-        .product-card { background-color: #242f3d; border-radius: 12px; padding: 10px; display: flex; flex-direction: column; }
-        .product-img { width: 100%; height: 100px; border-radius: 8px; margin-bottom: 10px; object-fit: cover; background: #2b3745; display: flex; align-items: center; justify-content: center; font-size: 24px; }
-        .product-name { font-size: 13px; font-weight: 500; margin-bottom: 5px; height: 35px; overflow: hidden; }
-        .product-price { font-size: 16px; font-weight: bold; color: #64b5f6; }
-        .buy-btn { margin-top: 10px; background-color: #3498db; color: white; border: none; border-radius: 6px; padding: 8px; font-weight: bold; cursor: pointer; }
-
-        /* КОРЗИНА */
-        .cart-item { background: #242f3d; margin: 10px; padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }
-
-        /* ПРОФИЛЬ */
+        .product-card { background: #242f3d; border-radius: 12px; padding: 10px; display: flex; flex-direction: column; }
+        .product-img { width: 100%; height: 100px; border-radius: 8px; object-fit: cover; margin-bottom: 10px; background: #2b3745; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .buy-btn { margin-top: 10px; background: #3498db; color: #fff; border: none; border-radius: 6px; padding: 8px; font-weight: bold; cursor: pointer; }
+        .cart-item { background: #242f3d; margin: 10px; padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; }
         .profile-container { display: flex; flex-direction: column; align-items: center; padding: 30px 20px; }
-        .user-avatar { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #3498db; object-fit: cover; margin-bottom: 15px; }
-        
-        /* НАВИГАЦИЯ */
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background-color: #17212b; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #242f3d; z-index: 100; }
+        .user-avatar { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #3498db; object-fit: cover; margin-bottom: 15px; background: #242f3d; }
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: #17212b; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #242f3d; }
         .nav-item { text-align: center; font-size: 10px; color: #6c7883; cursor: pointer; }
         .nav-item.active { color: #3498db; }
     </style>
 </head>
 <body>
-
-    <!-- СТРАНИЦА МАГАЗИНА -->
+    <!-- МАГАЗИН -->
     <div id="main-page" class="page active-page">
-        <div class="top-bar">
-            <span>☰</span><h1 style="font-size: 18px; margin: 0;">23 | rei</h1><span onclick="tg.showAlert('Поиск скоро появится')">🔍</span>
-        </div>
-        <div class="banner-container" onclick="openChannel()">
+        <div class="top-bar"><span>☰</span><h1 style="font-size: 18px; margin: 0;">23 | rei</h1><span>🔍</span></div>
+        <div class="banner-container" onclick="tg.openTelegramLink('https://t.me')">
             <img src="./87712C11-DC80-474C-B501-3BB3E86C794E.jpg" class="banner-img">
         </div>
         <div class="product-grid">
-            <div class="product-card">
-                <div class="product-img">🇺🇸</div>
-                <div class="product-name">Telegram (США)</div>
-                <div class="product-price">200 ₽</div>
-                <button class="buy-btn" onclick="addToCart('Telegram (США)', 200)">В корзину</button>
-            </div>
-            <div class="product-card">
-                <div class="product-img">🇰🇿</div>
-                <div class="product-name">Telegram (КЗ)</div>
-                <div class="product-price">300 ₽</div>
-                <button class="buy-btn" onclick="addToCart('Telegram (КЗ)', 300)">В корзину</button>
-            </div>
-            <div class="product-card">
-                <div class="product-img">🇰🇿</div>
-                <div class="product-name">VK (КЗ)</div>
-                <div class="product-price">250 ₽</div>
-                <button class="buy-btn" onclick="addToCart('VK (КЗ)', 250)">В корзину</button>
-            </div>
-            <div class="product-card">
-                <img src="./IMG_0485.jpg" class="product-img">
-                <div class="product-name">Tinder / Galaxy</div>
-                <div class="product-price">Скоро</div>
-                <button class="buy-btn" style="background-color: #444;" onclick="tg.showAlert('Ожидайте поставку!')">Ожидается</button>
-            </div>
+            <div class="product-card"><div class="product-img">🇺🇸</div><p style="margin:0;font-size:13px;">Telegram (США)</p><b>200 ₽</b><button class="buy-btn" onclick="addToCart('TG (США)', 200)">В корзину</button></div>
+            <div class="product-card"><div class="product-img">🇰🇿</div><p style="margin:0;font-size:13px;">Telegram (КЗ)</p><b>300 ₽</b><button class="buy-btn" onclick="addToCart('TG (КЗ)', 300)">В корзину</button></div>
+            <div class="product-card"><div class="product-img">🇰🇿</div><p style="margin:0;font-size:13px;">VK (КЗ)</p><b>250 ₽</b><button class="buy-btn" onclick="addToCart('VK (КЗ)', 250)">В корзину</button></div>
+            <div class="product-card"><img src="IMG_0485.jpg" class="product-img"><p style="margin:0;font-size:13px;">Tinder</p><b>Скоро</b><button class="buy-btn" style="background:#444;">Ожидается</button></div>
         </div>
     </div>
 
-    <!-- СТРАНИЦА КОРЗИНЫ -->
+    <!-- КОРЗИНА -->
     <div id="cart-page" class="page">
-        <div class="top-bar"><h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Корзина</h1></div>
-        <div id="cart-items-list"></div>
-        <div style="padding: 15px; text-align: center;">
-            <div style="font-size: 20px; margin-bottom: 10px;">Итого: <span id="total-price">0</span> ₽</div>
-            <button class="buy-btn" style="width: 100%; background-color: #2ecc71;" onclick="checkout()">Оформить покупку</button>
+        <div class="top-bar"><h1 style="margin:0 auto; font-size:18px;">Корзина</h1></div>
+        <div id="cart-list"></div>
+        <div style="padding:20px; text-align:center;">
+            <h3>Итого: <span id="total">0</span> ₽</h3>
+            <button class="buy-btn" style="width:100%; background:#2ecc71;" onclick="checkout()">Оформить</button>
         </div>
     </div>
 
-    <!-- СТРАНИЦА ПРОФИЛЯ -->
+    <!-- ПРОФИЛЬ -->
     <div id="profile-page" class="page">
-        <div class="top-bar"><h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Мой профиль</h1></div>
+        <div class="top-bar"><h1 style="margin:0 auto; font-size:18px;">Профиль</h1></div>
         <div class="profile-container">
-            <img id="user-photo" class="user-avatar" src="">
-            <div id="user-name" style="font-size: 22px; font-weight: bold;">Загрузка...</div>
-            <div id="user-nick" style="font-size: 14px; color: #3498db; margin-top: 5px;">@username</div>
-            <div id="user-id" style="font-size: 12px; color: #6c7883; margin-top: 10px;">ID: 00000000</div>
+            <img id="user-pic" class="user-avatar" src="">
+            <div id="u-name" style="font-size:20px; font-weight:bold;">Загрузка...</div>
+            <div id="u-nick" style="color:#3498db; margin-top:5px;">@username</div>
+            <div id="u-id" style="font-size:12px; color:grey; margin-top:5px;">ID: 000000</div>
         </div>
     </div>
 
-    <!-- МЕНЮ -->
     <div class="nav-bar">
-        <div id="nav-main" class="nav-item active" onclick="showPage('main')">🏠<br>Главная</div>
-        <div id="nav-cart" class="nav-item" onclick="showPage('cart')">🛒<br>Корзина (<span id="cart-count">0</span>)</div>
-        <div id="nav-profile" class="nav-item" onclick="showPage('profile')">👤<br>Профиль</div>
+        <div id="n-main" class="nav-item active" onclick="show('main')">🏠<br>Главная</div>
+        <div id="n-cart" class="nav-item" onclick="show('cart')">🛒<br>Корзина (<span id="count">0</span>)</div>
+        <div id="n-prof" class="nav-item" onclick="show('profile')">👤<br>Профиль</div>
     </div>
 
     <script>
         let tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
-
+        tg.ready(); tg.expand();
         let cart = [];
-        // Твои файлы на Гитхабе
-        const reiAvatars = ['IMG_0485.jpg', 'IMG_0489.jpg', 'IMG_0490.jpg', 'IMG_0491.jpg', 'IMG_0492.jpg'];
+        const reis = ['IMG_0485.jpg', 'IMG_0489.jpg', 'IMG_0490.jpg', 'IMG_0491.jpg', 'IMG_0492.jpg'];
 
-        function openChannel() {
-            tg.openTelegramLink('https://t.me');
-        }
-
-        // РАБОТА С КОРЗИНОЙ
-        function addToCart(name, price) {
-            cart.push({name, price});
+        function addToCart(n, p) {
+            cart.push({n, p});
             updateCart();
-            tg.HapticFeedback.impactOccurred('light');
+            tg.HapticFeedback.impactOccurred('medium');
         }
 
         function updateCart() {
-            document.getElementById('cart-count').innerText = cart.length;
-            const list = document.getElementById('cart-items-list');
-            list.innerHTML = '';
-            let total = 0;
-            cart.forEach((item, i) => {
-                total += item.price;
-                list.innerHTML += `<div class="cart-item"><span>${item.name}</span><b>${item.price} ₽</b><button onclick="remove(${i})" style="background:none; border:none; color:red;">✕</button></div>`;
+            document.getElementById('count').innerText = cart.length;
+            let res = ''; let t = 0;
+            cart.forEach((i, idx) => {
+                t += i.p;
+                res += `<div class="cart-item"><span>${i.n}</span><b>${i.p} ₽</b><span onclick="rem(${idx})" style="color:red;">✕</span></div>`;
             });
-            document.getElementById('total-price').innerText = total;
+            document.getElementById('cart-list').innerHTML = res;
+            document.getElementById('total').innerText = t;
         }
 
-        function remove(i) {
-            cart.splice(i, 1);
-            updateCart();
-        }
+        function rem(i) { cart.splice(i, 1); updateCart(); }
+        function checkout() { if(cart.length) tg.sendData("Заказ: " + cart.map(x=>x.n).join(", ")); }
 
-        function checkout() {
-            if(cart.length === 0) return tg.showAlert("Пусто!");
-            tg.sendData("Покупка: " + cart.map(i => i.name).join(", "));
-        }
-
-        // РАБОТА С ПРОФИЛЕМ
-        function renderUser() {
-            const user = tg.initDataUnsafe?.user;
-            if (user) {
-                document.getElementById("user-name").innerText = user.first_name + (user.last_name ? " " + user.last_name : "");
-                document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "Ник не задан";
-                document.getElementById("user-id").innerText = "ID: " + user.id;
-
-                // Рандомная Рей или реальное фото
-                if (user.photo_url) {
-                    document.getElementById("user-photo").src = user.photo_url;
-                } else {
-                    const randomImg = reiAvatars[Math.floor(Math.random() * reiAvatars.length)];
-                    document.getElementById("user-photo").src = "./" + randomImg;
+        function render() {
+            const u = tg.initDataUnsafe?.user;
+            if (u) {
+                document.getElementById("u-name").innerText = u.first_name + (u.last_name ? " " + u.last_name : "");
+                document.getElementById("u-nick").innerText = u.username ? "@" + u.username : "Ник скрыт";
+                document.getElementById("u-id").innerText = "ID: " + u.id;
+                if (u.photo_url) { document.getElementById("user-pic").src = u.photo_url; }
+                else { 
+                    const r = reis[Math.floor(Math.random() * reis.length)];
+                    document.getElementById("user-pic").src = "./" + r;
                 }
-            } else {
-                setTimeout(renderUser, 500);
-            }
+            } else { setTimeout(render, 500); }
         }
-        renderUser();
+        render();
 
-        function showPage(p) {
-            document.getElementById('main-page').style.display = p === 'main' ? 'block' : 'none';
-            document.getElementById('cart-page').style.display = p === 'cart' ? 'block' : 'none';
-            document.getElementById('profile-page').style.display = p === 'profile' ? 'block' : 'none';
-            
-            document.getElementById('nav-main').classList.toggle('active', p === 'main');
-            document.getElementById('nav-cart').classList.toggle('active', p === 'cart');
-            document.getElementById('nav-profile').classList.toggle('active', p === 'profile');
+        function show(p) {
+            ['main-page', 'cart-page', 'profile-page'].forEach(x => document.getElementById(x).style.display = 'none');
+            ['n-main', 'n-cart', 'n-prof'].forEach(x => document.getElementById(x).classList.remove('active'));
+            document.getElementById(p + '-page').style.display = 'block';
+            document.getElementById('n-' + p).classList.add('active');
         }
     </script>
 </body>
