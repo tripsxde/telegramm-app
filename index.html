@@ -26,19 +26,20 @@
             background-color: #17212b;
         }
 
+        /* БАННЕР: Увеличили высоту до 180px и закрепили левый верхний угол */
         .banner-container {
             width: 100%;
-            height: 140px;
+            height: 180px;
             overflow: hidden;
             cursor: pointer;
             border-bottom: 2px solid #242f3d;
-            margin-top: 10px;
         }
         .banner-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: 5% 70%;
+            /* Фокусируемся на левом верхнем углу, где число 23 */
+            object-position: left top; 
             display: block;
         }
 
@@ -72,18 +73,9 @@
         }
 
         .cart-item {
-            background: #242f3d;
-            margin: 10px;
-            padding: 15px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: #242f3d; margin: 10px; padding: 15px;
+            border-radius: 10px; display: flex; justify-content: space-between; align-items: center;
         }
-
-        .profile-container { display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        .user-avatar { width: 80px; height: 80px; border-radius: 50%; border: 2px solid #3498db; margin-bottom: 12px; object-fit: cover; background: #242f3d; }
-        .section-card { background-color: #242f3d; width: 100%; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-sizing: border-box; text-align: center; }
 
         .nav-bar { position: fixed; bottom: 0; width: 100%; background-color: #17212b; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #242f3d; z-index: 100; }
         .nav-item { text-align: center; font-size: 10px; color: #6c7883; cursor: pointer; }
@@ -92,6 +84,7 @@
 </head>
 <body>
 
+    <!-- МАГАЗИН -->
     <div id="main-page" class="page active-page">
         <div class="top-bar">
             <span>☰</span>
@@ -99,7 +92,8 @@
             <span onclick="tg.showAlert('Поиск скоро появится')">🔍</span>
         </div>
 
-        <div class="banner-container" onclick="tg.openTelegramLink('https://t.me')">
+        <!-- КЛИКАБЕЛЬНЫЙ БАННЕР -->
+        <div class="banner-container" onclick="tg.openTelegramLink('https://t.me/+-7dgCn7fPB8wYTky')">
             <img src="./87712C11-DC80-474C-B501-3BB3E86C794E.jpg" class="banner-img">
         </div>
 
@@ -131,30 +125,28 @@
         </div>
     </div>
 
+    <!-- КОРЗИНА -->
     <div id="cart-page" class="page">
         <div class="top-bar"><h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Корзина</h1></div>
         <div id="cart-items-list"></div>
-        <div class="section-card" style="margin: 10px;">
-            <div style="font-size: 18px; margin-bottom: 10px;">Итого: <span id="total-price">0</span> ₽</div>
-            <button class="buy-btn" style="width: 100%; background-color: #2ecc71;" onclick="checkout()">Оформить заказ</button>
+        <div style="padding: 15px; text-align: center;">
+            <div style="font-size: 20px; margin-bottom: 10px;">Итого: <span id="total-price">0</span> ₽</div>
+            <button class="buy-btn" style="width: 100%; background-color: #2ecc71;" onclick="checkout()">Купить всё</button>
         </div>
     </div>
 
+    <!-- ПРОФИЛЬ -->
     <div id="profile-page" class="page">
         <div class="top-bar"><h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Профиль</h1></div>
-        <div class="profile-container">
-            <img id="user-photo" class="user-avatar" src="https://ui-avatars.com">
-            <div id="user-name" style="font-size: 20px; font-weight: bold;">Загрузка...</div>
+        <div style="display: flex; flex-direction: column; align-items: center; padding: 20px;">
+            <img id="user-photo" style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid #3498db;" src="https://ui-avatars.com">
+            <div id="user-name" style="font-size: 20px; font-weight: bold; margin-top: 10px;">Загрузка...</div>
             <div id="user-nick" style="color: #3498db;">@username</div>
-            <div id="user-id" style="font-size: 12px; color: #6c7883; margin-top: 5px;">ID: 00000000</div>
-            <div class="section-card" style="margin-top: 20px;">
-                <div style="font-size: 11px; opacity: 0.6;">БАЛАНС</div>
-                <div style="font-size: 28px; font-weight: bold; color: #64b5f6;">0.00 ₽</div>
-                <button class="buy-btn" style="width: 100%; margin-top: 10px;" onclick="tg.showAlert('Пополнение в боте')">Пополнить</button>
-            </div>
+            <div id="user-id" style="font-size: 12px; color: #6c7883;">ID: 00000000</div>
         </div>
     </div>
 
+    <!-- МЕНЮ -->
     <div class="nav-bar">
         <div id="nav-main" class="nav-item active" onclick="showPage('main')">🏠<br>Главная</div>
         <div id="nav-cart" class="nav-item" onclick="showPage('cart')">🛒<br>Корзина (<span id="cart-count">0</span>)</div>
@@ -163,49 +155,38 @@
 
     <script>
         let tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
-
+        tg.ready(); tg.expand();
         let cart = [];
 
         function addToCart(name, price) {
             cart.push({name, price});
-            updateCartUI();
-            tg.HapticFeedback.impactOccurred('medium');
+            updateUI();
+            tg.HapticFeedback.impactOccurred('light');
         }
 
-        function updateCartUI() {
+        function updateUI() {
             document.getElementById('cart-count').innerText = cart.length;
             const list = document.getElementById('cart-items-list');
             list.innerHTML = '';
             let total = 0;
-            cart.forEach((item, index) => {
+            cart.forEach((item, i) => {
                 total += item.price;
-                list.innerHTML += `
-                    <div class="cart-item">
-                        <span>${item.name}</span>
-                        <span>${item.price} ₽</span>
-                        <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#e74c3c;">✕</button>
-                    </div>`;
+                list.innerHTML += `<div class="cart-item"><span>${item.name}</span><b>${item.price} ₽</b><button onclick="remove(${i})" style="background:none; border:none; color:red;">✕</button></div>`;
             });
             document.getElementById('total-price').innerText = total;
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
+        function remove(i) { cart.splice(i, 1); updateUI(); }
 
         function checkout() {
-            if (cart.length === 0) return tg.showAlert("Корзина пуста!");
-            let msg = "Новый заказ:\n" + cart.map(i => "- " + i.name).join("\n");
-            tg.sendData(msg);
+            if(cart.length === 0) return tg.showAlert("Пусто!");
+            tg.sendData("Заказ: " + cart.map(i => i.name).join(", "));
         }
 
         function renderUser() {
             const user = tg.initDataUnsafe?.user;
             if (user) {
-                document.getElementById("user-name").innerText = user.first_name + (user.last_name ? " " + user.last_name : "");
+                document.getElementById("user-name").innerText = user.first_name;
                 document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "ID: " + user.id;
                 document.getElementById("user-id").innerText = "ID: " + user.id;
                 if (user.photo_url) document.getElementById("user-photo").src = user.photo_url;
@@ -223,7 +204,4 @@
         }
     </script>
 </body>
-</html>'''
-Path('output').mkdir(exist_ok=True)
-Path('output/telegram_app_edited.html').write_text(html, encoding='utf-8')
-print('saved')
+</html>
