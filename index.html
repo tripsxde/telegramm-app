@@ -26,10 +26,10 @@
             background-color: #17212b;
         }
 
-        /* БАННЕР: Увеличили высоту до 180px и закрепили левый верхний угол */
+        /* БАННЕР: Настройка, чтобы было видно "23" сверху */
         .banner-container {
             width: 100%;
-            height: 180px;
+            height: 170px;
             overflow: hidden;
             cursor: pointer;
             border-bottom: 2px solid #242f3d;
@@ -38,8 +38,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Фокусируемся на левом верхнем углу, где число 23 */
-            object-position: left top; 
+            /* Фокусируемся на самом верху картинки, где число 23 */
+            object-position: center 0%; 
             display: block;
         }
 
@@ -93,7 +93,7 @@
         </div>
 
         <!-- КЛИКАБЕЛЬНЫЙ БАННЕР -->
-        <div class="banner-container" onclick="tg.openTelegramLink('https://t.me/+-7dgCn7fPB8wYTky')">
+        <div class="banner-container" onclick="openChannel()">
             <img src="./87712C11-DC80-474C-B501-3BB3E86C794E.jpg" class="banner-img">
         </div>
 
@@ -157,6 +157,11 @@
         let tg = window.Telegram.WebApp;
         tg.ready(); tg.expand();
         let cart = [];
+
+        // Исправленная функция для открытия канала
+        function openChannel() {
+            tg.openTelegramLink('https://t.me');
+        }
 
         function addToCart(name, price) {
             cart.push({name, price});
