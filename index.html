@@ -7,24 +7,24 @@
     <style>
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: #17212b;
+            background-color: #17212b; /* Темно-синий фон */
             color: #ffffff;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
 
-        /* Общие стили страниц */
+        /* Анимация появления страниц */
         .page {
-            display: none; /* Скрываем все страницы по умолчанию */
+            display: none; 
             padding-bottom: 80px;
             animation: fadeIn 0.3s ease;
         }
-        .active-page { display: block; } /* Показываем только активную */
+        .active-page { display: block; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Шапка */
+        /* Шапка сайта */
         .header {
             padding: 15px;
             display: flex;
@@ -36,7 +36,7 @@
             z-index: 10;
         }
 
-        /* Сетка товаров */
+        /* Витрина товаров */
         .product-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -53,49 +53,87 @@
         }
 
         .product-img {
-            width: 100%; height: 100px; border-radius: 8px; margin-bottom: 10px;
-            object-fit: cover; background: #2b3745; display: flex;
-            align-items: center; justify-content: center; font-size: 24px;
+            width: 100%;
+            height: 100px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            object-fit: cover;
+            background: #2b3745;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
         }
 
         .product-name { font-size: 14px; font-weight: 500; margin-bottom: 5px; height: 35px; overflow: hidden; }
         .product-price { font-size: 16px; font-weight: bold; color: #64b5f6; }
 
         .buy-btn {
-            margin-top: 10px; background-color: #3498db; color: white;
-            border: none; border-radius: 6px; padding: 8px; font-weight: bold; cursor: pointer;
+            margin-top: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        /* Стили профиля */
+        /* Стили страницы профиля */
         .profile-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 40px 20px;
         }
+
         .user-avatar {
-            width: 100px; height: 100px; border-radius: 50%;
-            background-color: #3498db; margin-bottom: 15px;
-            border: 3px solid #242f3d; object-fit: cover;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #242f3d;
+            margin-bottom: 15px;
+            border: 3px solid #3498db;
+            object-fit: cover;
         }
-        .user-name { font-size: 22px; font-weight: bold; margin-bottom: 5px; }
-        .user-id { font-size: 14px; color: #6c7883; margin-bottom: 20px; }
-        
+
+        .user-name { font-size: 20px; font-weight: bold; margin-bottom: 2px; }
+        .user-nick { font-size: 14px; color: #3498db; margin-bottom: 10px; }
+        .user-id { font-size: 12px; color: #6c7883; margin-bottom: 25px; }
+
         .balance-card {
             background-color: #242f3d;
-            width: 100%; border-radius: 15px; padding: 20px;
-            text-align: center; box-sizing: border-box;
+            width: 100%;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
         }
+
         .balance-amount { font-size: 32px; font-weight: bold; color: #64b5f6; margin-top: 10px; }
 
-        /* Нижнее меню */
+        /* Нижнее меню навигации */
         .nav-bar {
-            position: fixed; bottom: 0; width: 100%;
-            background-color: #17212b; display: flex;
-            justify-content: space-around; padding: 10px 0;
-            border-top: 1px solid #242f3d; z-index: 100;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #17212b;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #242f3d;
+            z-index: 100;
         }
-        .nav-item { text-align: center; font-size: 10px; color: #6c7883; cursor: pointer; transition: 0.2s; }
+
+        .nav-item {
+            text-align: center;
+            font-size: 10px;
+            color: #6c7883;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
         .nav-item.active { color: #3498db; }
         .nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
     </style>
@@ -129,6 +167,7 @@
                 <button class="buy-btn" onclick="buy('VK KZ')">Купить</button>
             </div>
             <div class="product-card">
+                <!-- Картинка Рей (имя файла должно быть в репозитории) -->
                 <img src="./IMG_0485.jpg" class="product-img" onerror="this.src='https://placeholder.com'">
                 <div class="product-name">Tinder / Galaxy</div>
                 <div class="product-price">Скоро</div>
@@ -143,24 +182,27 @@
             <h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Личный кабинет</h1>
         </div>
         <div class="profile-container">
-            <img id="user-photo" class="user-avatar" src="https://placeholder.com" alt="Avatar">
-            <div id="user-full-name" class="user-name">Пользователь</div>
-            <div id="user-id-label" class="user-id">ID: 00000000</div>
+            <!-- Аватарка (загружается автоматически) -->
+            <img id="user-photo" class="user-avatar" src="https://ui-avatars.com" alt="Avatar">
+            
+            <div id="user-name" class="user-name">Загрузка...</div>
+            <div id="user-nick" class="user-nick">@username</div>
+            <div id="user-id" class="user-id">ID: 00000000</div>
             
             <div class="balance-card">
-                <div style="font-size: 14px; opacity: 0.7;">Ваш баланс</div>
+                <div style="font-size: 12px; opacity: 0.6; text-transform: uppercase;">Мой баланс</div>
                 <div class="balance-amount">0.00 ₽</div>
-                <button class="buy-btn" style="margin-top: 15px;" onclick="tg.showAlert('Пополнение пока недоступно')">Пополнить</button>
+                <button class="buy-btn" style="margin-top: 15px; width: 80%;" onclick="tg.showAlert('Пополнение в разработке')">Пополнить</button>
             </div>
         </div>
     </div>
 
-    <!-- НИЖНЕЕ МЕНЮ -->
+    <!-- НИЖНЯЯ НАВИГАЦИЯ -->
     <div class="nav-bar">
         <div id="nav-main" class="nav-item active" onclick="showPage('main')">
             <span class="nav-icon">🏠</span>Главная
         </div>
-        <div class="nav-item" onclick="tg.showAlert('Раздел в разработке')">
+        <div class="nav-item" onclick="tg.showAlert('Корзина пуста')">
             <span class="nav-icon">🛒</span>Корзина
         </div>
         <div id="nav-profile" class="nav-item" onclick="showPage('profile')">
@@ -172,27 +214,28 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
 
-        // Подтягиваем данные из Telegram
-        if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
-            const user = tg.initDataUnsafe.user;
-            document.getElementById("user-full-name").innerText = user.first_name + (user.last_name ? " " + user.last_name : "");
-            document.getElementById("user-id-label").innerText = "ID: " + user.id;
-            
-            // Если у пользователя есть аватарка в телеграм, пробуем её получить (работает только через Bot API)
+        // Заполнение данных профиля из Telegram
+        const user = tg.initDataUnsafe?.user;
+        if (user) {
+            document.getElementById("user-name").innerText = user.first_name + (user.last_name ? " " + user.last_name : "");
+            document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "Ник не скрыт";
+            document.getElementById("user-id").innerText = "ID: " + user.id;
+
+            // Пробуем подтянуть фото или создаем аватарку с первой буквой имени
             if (user.photo_url) {
                 document.getElementById("user-photo").src = user.photo_url;
+            } else {
+                document.getElementById("user-photo").src = `https://ui-avatars.com{user.first_name}&background=3498db&color=fff`;
             }
         }
 
-        // Функция переключения страниц
+        // Переключение страниц
         function showPage(pageName) {
-            // Скрываем все страницы
             document.getElementById('main-page').classList.remove('active-page');
             document.getElementById('profile-page').classList.remove('active-page');
             document.getElementById('nav-main').classList.remove('active');
             document.getElementById('nav-profile').classList.remove('active');
 
-            // Показываем нужную
             if (pageName === 'main') {
                 document.getElementById('main-page').classList.add('active-page');
                 document.getElementById('nav-main').classList.add('active');
@@ -203,7 +246,7 @@
         }
 
         function buy(item) {
-            tg.sendData("Купить: " + item);
+            tg.sendData("Запрос на покупку: " + item);
         }
     </script>
 </body>
