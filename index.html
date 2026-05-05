@@ -14,11 +14,10 @@
             overflow-x: hidden;
         }
 
-        .page { display: none; padding-bottom: 80px; animation: fadeIn 0.3s ease; }
+        .page { display: none; padding-bottom: 80px; animation: fadeIn 0.2s ease; }
         .active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Шапка с названием и поиском */
         .top-bar {
             padding: 15px;
             display: flex;
@@ -27,25 +26,22 @@
             background-color: #17212b;
         }
 
-        /* Баннер: Смещаем влево, чтобы было видно "23" и девочку */
+        /* Улучшенный баннер: высота 160px и фокус на левую часть */
         .banner-container {
             width: 100%;
-            height: 150px;
+            height: 160px;
             overflow: hidden;
             cursor: pointer;
             border-bottom: 2px solid #242f3d;
-            border-top: 1px solid #242f3d;
         }
         .banner-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Смещение картинки: влево (left) */
-            object-position: left center; 
+            object-position: 5% center; /* Сдвигаем еще левее, чтобы было видно "23" */
             display: block;
         }
 
-        /* Сетка товаров */
         .product-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -75,15 +71,23 @@
             border: none; border-radius: 6px; padding: 8px; font-weight: bold; cursor: pointer;
         }
 
-        /* Личный кабинет */
-        .profile-container { display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        .user-avatar { width: 90px; height: 90px; border-radius: 50%; border: 2px solid #3498db; margin-bottom: 12px; object-fit: cover; background: #242f3d; }
-        .user-name { font-size: 20px; font-weight: bold; margin-bottom: 2px; text-align: center; }
-        .user-nick { font-size: 14px; color: #3498db; margin-bottom: 5px; }
-        .section-card { background-color: #242f3d; width: 100%; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-sizing: border-box; text-align: center; }
-        .promo-input { width: 100%; padding: 12px; background: #17212b; border: 1px solid #3498db; border-radius: 8px; color: white; box-sizing: border-box; margin-bottom: 10px; text-align: center; }
+        /* Корзина */
+        .cart-item {
+            background: #242f3d;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-        /* Нижнее меню */
+        /* Профиль */
+        .profile-container { display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .user-avatar { width: 80px; height: 80px; border-radius: 50%; border: 2px solid #3498db; margin-bottom: 12px; object-fit: cover; background: #242f3d; }
+        .section-card { background-color: #242f3d; width: 100%; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-sizing: border-box; text-align: center; }
+
+        /* Навигация */
         .nav-bar { position: fixed; bottom: 0; width: 100%; background-color: #17212b; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #242f3d; z-index: 100; }
         .nav-item { text-align: center; font-size: 10px; color: #6c7883; cursor: pointer; }
         .nav-item.active { color: #3498db; }
@@ -91,7 +95,7 @@
 </head>
 <body>
 
-    <!-- СТРАНИЦА МАГАЗИНА -->
+    <!-- МАГАЗИН -->
     <div id="main-page" class="page active-page">
         <div class="top-bar">
             <span>☰</span>
@@ -99,9 +103,8 @@
             <span onclick="tg.showAlert('Поиск скоро появится')">🔍</span>
         </div>
 
-        <!-- КЛИКАБЕЛЬНЫЙ БАННЕР -->
-        <div class="banner-container" onclick="tg.openTelegramLink('https://t.me/+-7dgCn7fPB8wYTky')">
-            <img src="./87712C11-DC80-474C-B501-3BB3E86C794E.jpg" class="banner-img" onerror="this.src='https://placeholder.com'">
+        <div class="banner-container" onclick="tg.openTelegramLink('https://t.me')">
+            <img src="./87712C11-DC80-474C-B501-3BB3E86C794E.jpg" class="banner-img">
         </div>
 
         <div class="product-grid">
@@ -109,22 +112,22 @@
                 <div class="product-img">🇺🇸</div>
                 <div class="product-name">Telegram (США)</div>
                 <div class="product-price">200 ₽</div>
-                <button class="buy-btn" onclick="buy('TG USA')">Купить</button>
+                <button class="buy-btn" onclick="addToCart('Telegram (США)', 200)">В корзину</button>
             </div>
             <div class="product-card">
                 <div class="product-img">🇰🇿</div>
                 <div class="product-name">Telegram (КЗ)</div>
                 <div class="product-price">300 ₽</div>
-                <button class="buy-btn" onclick="buy('TG KZ')">Купить</button>
+                <button class="buy-btn" onclick="addToCart('Telegram (КЗ)', 300)">В корзину</button>
             </div>
             <div class="product-card">
                 <div class="product-img">🇰🇿</div>
                 <div class="product-name">VK (КЗ)</div>
                 <div class="product-price">250 ₽</div>
-                <button class="buy-btn" onclick="buy('VK KZ')">Купить</button>
+                <button class="buy-btn" onclick="addToCart('VK (КЗ)', 250)">В корзину</button>
             </div>
             <div class="product-card">
-                <img src="./IMG_0485.jpg" class="product-img" onerror="this.src='https://placeholder.com'">
+                <img src="./IMG_0485.jpg" class="product-img">
                 <div class="product-name">Tinder / Galaxy</div>
                 <div class="product-price">Скоро</div>
                 <button class="buy-btn" style="background-color: #444;" onclick="tg.showAlert('Ожидайте поставку!')">Ожидается</button>
@@ -132,30 +135,31 @@
         </div>
     </div>
 
-    <!-- СТРАНИЦА ПРОФИЛЯ -->
-    <div id="profile-page" class="page">
-        <div class="top-bar">
-            <h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Личный кабинет</h1>
+    <!-- КОРЗИНА -->
+    <div id="cart-page" class="page">
+        <div class="top-bar"><h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Корзина</h1></div>
+        <div id="cart-items-list">
+            <!-- Сюда будут добавляться товары -->
         </div>
+        <div class="section-card" style="margin: 10px;">
+            <div style="font-size: 18px; margin-bottom: 10px;">Итого: <span id="total-price">0</span> ₽</div>
+            <button class="buy-btn" style="width: 100%; background-color: #2ecc71;" onclick="checkout()">Оформить заказ</button>
+        </div>
+    </div>
+
+    <!-- ПРОФИЛЬ -->
+    <div id="profile-page" class="page">
+        <div class="top-bar"><h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Профиль</h1></div>
         <div class="profile-container">
             <img id="user-photo" class="user-avatar" src="https://ui-avatars.com">
-            <div id="user-name" class="user-name">Загрузка данных...</div>
-            <div id="user-nick" class="user-nick">@username</div>
-            <div id="user-id" style="font-size: 12px; color: #6c7883; margin-bottom: 20px;">ID: 00000000</div>
-
-            <div class="section-card">
-                <div style="font-size: 11px; opacity: 0.6; margin-bottom: 5px;">ВАШ БАЛАНС</div>
+            <div id="user-name" style="font-size: 20px; font-weight: bold;">Загрузка...</div>
+            <div id="user-nick" style="color: #3498db;">@username</div>
+            <div id="user-id" style="font-size: 12px; color: #6c7883; margin-top: 5px;">ID: 00000000</div>
+            
+            <div class="section-card" style="margin-top: 20px;">
+                <div style="font-size: 11px; opacity: 0.6;">БАЛАНС</div>
                 <div style="font-size: 28px; font-weight: bold; color: #64b5f6;">0.00 ₽</div>
-                <button class="buy-btn" style="width: 100%; margin-top: 10px;" onclick="tg.showAlert('Пополнение в разработке')">Пополнить</button>
-            </div>
-
-            <div class="section-card">
-                <button class="buy-btn" style="width: 100%; background-color: #2ecc71;" onclick="copyRef()">Пригласить друга</button>
-            </div>
-
-            <div class="section-card">
-                <input type="text" id="promo" class="promo-input" placeholder="Промокод">
-                <button class="buy-btn" style="width: 100%;" onclick="usePromo()">Активировать</button>
+                <button class="buy-btn" style="width: 100%; margin-top: 10px;" onclick="tg.showAlert('Пополнение в боте')">Пополнить</button>
             </div>
         </div>
     </div>
@@ -163,6 +167,7 @@
     <!-- МЕНЮ -->
     <div class="nav-bar">
         <div id="nav-main" class="nav-item active" onclick="showPage('main')">🏠<br>Главная</div>
+        <div id="nav-cart" class="nav-item" onclick="showPage('cart')">🛒<br>Корзина (<span id="cart-count">0</span>)</div>
         <div id="nav-profile" class="nav-item" onclick="showPage('profile')">👤<br>Профиль</div>
     </div>
 
@@ -171,36 +176,61 @@
         tg.ready();
         tg.expand();
 
+        let cart = [];
+
+        function addToCart(name, price) {
+            cart.push({name, price});
+            updateCartUI();
+            tg.HapticFeedback.impactOccurred('medium');
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const list = document.getElementById('cart-items-list');
+            list.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.name}</span>
+                        <span>${item.price} ₽</span>
+                        <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#e74c3c;">✕</button>
+                    </div>`;
+            });
+            document.getElementById('total-price').innerText = total;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function checkout() {
+            if (cart.length === 0) return tg.showAlert("Корзина пуста!");
+            let msg = "Новый заказ:\n" + cart.map(i => "- " + i.name).join("\n");
+            tg.sendData(msg);
+        }
+
         function renderUser() {
             const user = tg.initDataUnsafe?.user;
             if (user) {
                 document.getElementById("user-name").innerText = user.first_name + (user.last_name ? " " + user.last_name : "");
-                document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "Никнейм не задан";
+                document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "ID: " + user.id;
                 document.getElementById("user-id").innerText = "ID: " + user.id;
-                if (user.photo_url) { document.getElementById("user-photo").src = user.photo_url; }
-                else { document.getElementById("user-photo").src = `https://ui-avatars.com{encodeURIComponent(user.first_name)}&background=3498db&color=fff`; }
+                if (user.photo_url) document.getElementById("user-photo").src = user.photo_url;
             } else { setTimeout(renderUser, 500); }
         }
         renderUser();
 
         function showPage(p) {
             document.getElementById('main-page').style.display = p === 'main' ? 'block' : 'none';
+            document.getElementById('cart-page').style.display = p === 'cart' ? 'block' : 'none';
             document.getElementById('profile-page').style.display = p === 'profile' ? 'block' : 'none';
             document.getElementById('nav-main').classList.toggle('active', p === 'main');
+            document.getElementById('nav-cart').classList.toggle('active', p === 'cart');
             document.getElementById('nav-profile').classList.toggle('active', p === 'profile');
         }
-
-        function copyRef() {
-            const id = tg.initDataUnsafe?.user?.id || "0";
-            tg.showAlert("Твоя ссылка: https://t.me" + id);
-        }
-
-        function usePromo() {
-            const c = document.getElementById('promo').value;
-            tg.showAlert(c ? "Код " + c + " не найден" : "Введи код");
-        }
-
-        function buy(i) { tg.sendData("Купить: " + i); }
     </script>
 </body>
 </html>
