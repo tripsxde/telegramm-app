@@ -6,12 +6,12 @@
     <script src="https://telegram.org"></script>
     <style>
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #17212b; /* Глубокий темно-синий */
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #17212b; /* Темно-синий фон как на скрине */
             color: #ffffff;
             margin: 0;
             padding: 0;
-            padding-bottom: 70px; /* Место под нижнее меню */
+            padding-bottom: 70px;
         }
 
         /* Шапка */
@@ -26,12 +26,10 @@
             z-index: 10;
         }
 
-        .header h1 { font-size: 18px; margin: 0; }
-
         /* Сетка товаров */
         .product-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 2 колонки */
+            grid-template-columns: 1fr 1fr;
             gap: 12px;
             padding: 12px;
         }
@@ -42,27 +40,27 @@
             padding: 10px;
             display: flex;
             flex-direction: column;
-            position: relative;
         }
 
-        /* Имитация картинки номера */
+        /* Стиль для картинок и флагов */
         .product-img {
             width: 100%;
             height: 100px;
-            background: linear-gradient(135deg, #3498db, #2980b9);
             border-radius: 8px;
+            margin-bottom: 10px;
+            object-fit: cover; /* Чтобы фото Рей было ровным */
+            background: #2b3745;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 40px;
-            margin-bottom: 10px;
         }
 
         .product-name {
             font-size: 14px;
             font-weight: 500;
             margin-bottom: 5px;
-            height: 40px; /* Чтобы названия были в одну линию */
+            height: 35px;
             overflow: hidden;
         }
 
@@ -95,25 +93,20 @@
             border-top: 1px solid #242f3d;
         }
 
-        .nav-item {
-            text-align: center;
-            font-size: 10px;
-            color: #6c7883;
-        }
+        .nav-item { text-align: center; font-size: 10px; color: #6c7883; }
         .nav-item.active { color: #3498db; }
-        .nav-icon { font-size: 20px; display: block; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <span>☰</span>
-        <h1>FloydShop</h1>
+        <h1 style="font-size: 18px; margin: 0;">FloydShop</h1>
         <span>🔍</span>
     </div>
 
     <div class="product-grid">
-        <!-- Номер 1 -->
+        <!-- Услуга 1 -->
         <div class="product-card">
             <div class="product-img">🇺🇸</div>
             <div class="product-name">Telegram (США)</div>
@@ -121,7 +114,7 @@
             <button class="buy-btn" onclick="buy('TG USA')">Купить</button>
         </div>
 
-        <!-- Номер 2 -->
+        <!-- Услуга 2 -->
         <div class="product-card">
             <div class="product-img">🇰🇿</div>
             <div class="product-name">Telegram (Казахстан)</div>
@@ -129,20 +122,28 @@
             <button class="buy-btn" onclick="buy('TG KZ')">Купить</button>
         </div>
 
-        <!-- Номер 3 -->
+        <!-- Услуга 3 -->
         <div class="product-card">
             <div class="product-img">🇰🇿</div>
             <div class="product-name">VK (Казахстан)</div>
             <div class="product-price">250 ₽</div>
             <button class="buy-btn" onclick="buy('VK KZ')">Купить</button>
         </div>
+
+        <!-- Услуга 4 (С КАРТИНКОЙ РЕЙ) -->
+        <div class="product-card">
+            <img src="https://imgur.com" class="product-img">
+            <div class="product-name">Tinder / Galaxy</div>
+            <div class="product-price">Скоро</div>
+            <button class="buy-btn" style="background-color: #444;" onclick="tg.showAlert('Эта услуга появится скоро!')">Ожидается</button>
+        </div>
     </div>
 
     <div class="nav-bar">
-        <div class="nav-item active"><span class="nav-icon">🏠</span>Главная</div>
-        <div class="nav-item"><span class="nav-icon">❤️</span>Избранное</div>
-        <div class="nav-item"><span class="nav-icon">🛒</span>Корзина</div>
-        <div class="nav-item"><span class="nav-icon">👤</span>Профиль</div>
+        <div class="nav-item active">🏠<br>Главная</div>
+        <div class="nav-item">❤️<br>Избранное</div>
+        <div class="nav-item">🛒<br>Корзина</div>
+        <div class="nav-item">👤<br>Профиль</div>
     </div>
 
     <script>
@@ -155,6 +156,3 @@
     </script>
 </body>
 </html>
-
-
-
