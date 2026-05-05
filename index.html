@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- ГЛАВНЫЙ СКРИПТ TELEGRAM -->
     <script src="https://telegram.org"></script>
     <style>
         body {
@@ -14,6 +15,7 @@
             overflow-x: hidden;
         }
 
+        /* Плавное появление страниц */
         .page {
             display: none; 
             padding-bottom: 80px;
@@ -34,6 +36,7 @@
             z-index: 10;
         }
 
+        /* Витрина */
         .product-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -63,7 +66,7 @@
             border: none; border-radius: 6px; padding: 8px; font-weight: bold; cursor: pointer;
         }
 
-        /* Стили профиля */
+        /* Профиль */
         .profile-container {
             display: flex;
             flex-direction: column;
@@ -75,9 +78,9 @@
             background-color: #242f3d; margin-bottom: 15px;
             border: 3px solid #3498db; object-fit: cover;
         }
-        .user-name { font-size: 22px; font-weight: bold; margin-bottom: 5px; }
+        .user-name { font-size: 22px; font-weight: bold; margin-bottom: 5px; text-align: center; }
         .user-nick { font-size: 14px; color: #3498db; margin-bottom: 10px; }
-        .user-id { font-size: 14px; color: #6c7883; margin-bottom: 20px; }
+        .user-id { font-size: 13px; color: #6c7883; margin-bottom: 20px; }
         
         .balance-card {
             background-color: #242f3d;
@@ -86,6 +89,7 @@
         }
         .balance-amount { font-size: 32px; font-weight: bold; color: #64b5f6; margin-top: 10px; }
 
+        /* Меню навигации */
         .nav-bar {
             position: fixed; bottom: 0; width: 100%;
             background-color: #17212b; display: flex;
@@ -94,11 +98,12 @@
         }
         .nav-item { text-align: center; font-size: 10px; color: #6c7883; cursor: pointer; }
         .nav-item.active { color: #3498db; }
+        .nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
     </style>
 </head>
 <body>
 
-    <!-- МАГАЗИН -->
+    <!-- СТРАНИЦА МАГАЗИНА -->
     <div id="main-page" class="page active-page">
         <div class="header">
             <span>☰</span>
@@ -118,19 +123,19 @@
         </div>
     </div>
 
-    <!-- ПРОФИЛЬ -->
+    <!-- СТРАНИЦА ПРОФИЛЯ -->
     <div id="profile-page" class="page">
         <div class="header">
             <h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Личный кабинет</h1>
         </div>
         <div class="profile-container">
             <img id="user-photo" class="user-avatar" src="https://ui-avatars.com" alt="Avatar">
-            <div id="user-name" class="user-name">Загрузка...</div>
+            <div id="user-name" class="user-name">Поиск данных...</div>
             <div id="user-nick" class="user-nick">@username</div>
             <div id="user-id" class="user-id">ID: 00000000</div>
             
             <div class="balance-card">
-                <div style="font-size: 12px; opacity: 0.7;">ВАШ БАЛАНС</div>
+                <div style="font-size: 12px; opacity: 0.7; letter-spacing: 1px;">МОЙ БАЛАНС</div>
                 <div class="balance-amount">0.00 ₽</div>
                 <button class="buy-btn" style="margin-top: 15px; width: 80%;" onclick="tg.showAlert('Пополнение в разработке')">Пополнить</button>
             </div>
@@ -139,43 +144,77 @@
 
     <!-- МЕНЮ -->
     <div class="nav-bar">
-        <div id="nav-main" class="nav-item active" onclick="showPage('main')">🏠<br>Главная</div>
-        <div class="nav-item" onclick="tg.showAlert('Корзина пуста')">🛒<br>Корзина</div>
-        <div id="nav-profile" class="nav-item" onclick="showPage('profile')">👤<br>Профиль</div>
+        <div id="nav-main" class="nav-item active" onclick="showPage('main')">
+            <span class="nav-icon">🏠</span>Главная
+        </div>
+        <div class="nav-item" onclick="tg.showAlert('Корзина пока пуста')">
+            <span class="nav-icon">🛒</span>Корзина
+        </div>
+        <div id="nav-profile" class="nav-item" onclick="showPage('profile')">
+            <span class="nav-icon">👤</span>Профиль
+        </div>
     </div>
 
     <script>
         let tg = window.Telegram.WebApp;
+        tg.ready();
         tg.expand();
 
+        // ФУНКЦИЯ ПОЛУЧЕНИЯ ДАННЫХ ЮЗЕРА
         function renderUser() {
+            // Пытаемся достать данные напрямую
             const user = tg.initDataUnsafe?.user;
-            if (user) {
-                document.getElementById("user-name").innerText = user.first_name + (user.last_name ? " " + user.last_name : "");
-                document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "Ник не задан";
-                document.getElementById("user-id").innerText = "ID: " + user.id;
 
+            if (user) {
+                // Имя и Фамилия
+                document.getElementById("user-name").innerText = user.first_name + (user.last_name ? " " + user.last_name : "");
+                
+                // Юзернейм
+                document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "Никнейм не задан";
+                
+                // ID
+                document.getElementById("user-id").innerText = "Ваш ID: " + user.id;
+
+                // Фотография
                 if (user.photo_url) {
                     document.getElementById("user-photo").src = user.photo_url;
                 } else {
-                    document.getElementById("user-photo").src = `https://ui-avatars.com{user.first_name}&background=3498db&color=fff`;
+                    // Генерируем аватарку с первой буквой имени, если фото скрыто
+                    document.getElementById("user-photo").src = `https://ui-avatars.com{encodeURIComponent(user.first_name)}&background=3498db&color=fff`;
                 }
             } else {
-                // Если данные еще не пришли, пробуем снова через 200мс
-                setTimeout(renderUser, 200);
+                // Если Telegram еще не передал данные, пробуем еще раз через 300мс
+                setTimeout(renderUser, 300);
             }
         }
 
+        // Запускаем процесс распознавания юзера
         renderUser();
 
+        // ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
         function showPage(pageName) {
-            document.getElementById('main-page').style.display = pageName === 'main' ? 'block' : 'none';
-            document.getElementById('profile-page').style.display = pageName === 'profile' ? 'block' : 'none';
-            document.getElementById('nav-main').classList.toggle('active', pageName === 'main');
-            document.getElementById('nav-profile').classList.toggle('active', pageName === 'profile');
+            const mainPage = document.getElementById('main-page');
+            const profilePage = document.getElementById('profile-page');
+            const navMain = document.getElementById('nav-main');
+            const navProfile = document.getElementById('nav-profile');
+
+            if (pageName === 'main') {
+                mainPage.style.display = 'block';
+                profilePage.style.display = 'none';
+                navMain.classList.add('active');
+                navProfile.classList.remove('active');
+            } else if (pageName === 'profile') {
+                mainPage.style.display = 'none';
+                profilePage.style.display = 'block';
+                navMain.classList.remove('active');
+                navProfile.classList.add('active');
+            }
         }
 
-        function buy(item) { tg.sendData("Купить: " + item); }
+        function buy(item) {
+            tg.sendData("Заказ: " + item);
+        }
     </script>
 </body>
 </html>
+
