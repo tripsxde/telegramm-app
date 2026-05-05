@@ -3,50 +3,44 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- ГЛАВНЫЙ СКРИПТ TELEGRAM -->
     <script src="https://telegram.org"></script>
     <style>
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: #17212b; /* Темно-синий фон */
+            background-color: #17212b;
             color: #ffffff;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
 
-        /* Плавное переключение страниц */
-        .page {
-            display: none; 
-            padding-bottom: 80px;
-            animation: fadeIn 0.3s ease;
-        }
+        .page { display: none; padding-bottom: 80px; animation: fadeIn 0.3s ease; }
         .active-page { display: block; }
-
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Баннер в стиле Discord (самый верх) */
+        /* Поиск и Заголовок в самом верху */
+        .top-bar {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #17212b;
+        }
+
+        /* Баннер ТЕПЕРЬ НИЖЕ ПОИСКА */
         .banner-container {
             width: 100%;
             height: 140px;
             overflow: hidden;
             cursor: pointer;
             border-bottom: 2px solid #242f3d;
+            border-top: 1px solid #242f3d;
         }
         .banner-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.2s;
-        }
-        .banner-img:active { transform: scale(0.98); }
-
-        .header {
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #17212b;
+            display: block;
         }
 
         /* Сетка товаров */
@@ -79,60 +73,34 @@
             border: none; border-radius: 6px; padding: 8px; font-weight: bold; cursor: pointer;
         }
 
-        /* Личный кабинет (Профиль) */
-        .profile-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-        .user-avatar {
-            width: 90px; height: 90px; border-radius: 50%;
-            border: 2px solid #3498db; margin-bottom: 12px;
-            object-fit: cover; background: #242f3d;
-        }
+        /* Профиль */
+        .profile-container { display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .user-avatar { width: 90px; height: 90px; border-radius: 50%; border: 2px solid #3498db; margin-bottom: 12px; object-fit: cover; background: #242f3d; }
         .user-name { font-size: 20px; font-weight: bold; margin-bottom: 2px; text-align: center; }
-        .user-nick { font-size: 14px; color: #3498db; margin-bottom: 15px; }
-        
-        /* Карточки в профиле */
-        .section-card {
-            background-color: #242f3d;
-            width: 100%; border-radius: 15px; padding: 15px;
-            margin-bottom: 15px; box-sizing: border-box; text-align: center;
-        }
-        .section-title {
-            font-size: 11px; opacity: 0.6; text-transform: uppercase;
-            margin-bottom: 10px; letter-spacing: 1px; text-align: left;
-        }
-        .promo-input {
-            width: 100%; padding: 12px; background: #17212b; border: 1px solid #3498db;
-            border-radius: 8px; color: white; box-sizing: border-box; margin-bottom: 10px; text-align: center;
-        }
+        .user-nick { font-size: 14px; color: #3498db; margin-bottom: 5px; }
+        .section-card { background-color: #242f3d; width: 100%; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-sizing: border-box; text-align: center; }
+        .promo-input { width: 100%; padding: 12px; background: #17212b; border: 1px solid #3498db; border-radius: 8px; color: white; box-sizing: border-box; margin-bottom: 10px; text-align: center; }
 
-        /* Навигация (низ) */
-        .nav-bar {
-            position: fixed; bottom: 0; width: 100%;
-            background-color: #17212b; display: flex;
-            justify-content: space-around; padding: 10px 0;
-            border-top: 1px solid #242f3d; z-index: 100;
-        }
+        /* Навигация */
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background-color: #17212b; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #242f3d; z-index: 100; }
         .nav-item { text-align: center; font-size: 10px; color: #6c7883; cursor: pointer; }
         .nav-item.active { color: #3498db; }
-        .nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
     </style>
 </head>
 <body>
 
-    <!-- ПЕРВАЯ СТРАНИЦА: МАГАЗИН -->
+    <!-- МАГАЗИН -->
     <div id="main-page" class="page active-page">
-        <!-- БАННЕР-ССЫЛКА -->
-        <div class="banner-container" onclick="tg.openTelegramLink('https://t.me')">
-            <img src="./87712C11-DC80-474C-B501-3BB3E86C794E.jpg" class="banner-img" onerror="this.src='https://placeholder.com'">
+        <!-- ПОИСК ТЕПЕРЬ СВЕРХУ -->
+        <div class="top-bar">
+            <span>☰</span>
+            <h1 style="font-size: 18px; margin: 0;">23 | rei</h1>
+            <span onclick="tg.showAlert('Поиск скоро появится')">🔍</span>
         </div>
 
-        <div class="header">
-            <h1 style="font-size: 18px; margin: 0;">FloydShop</h1>
-            <span>🔍</span>
+        <!-- КЛИКАБЕЛЬНЫЙ БАННЕР -->
+        <div class="banner-container" onclick="window.location.href='https://t.me'">
+            <img src="./87712C11-DC80-474C-B501-3BB3E86C794E.jpg" class="banner-img" onerror="this.src='https://placeholder.com'">
         </div>
 
         <div class="product-grid">
@@ -144,13 +112,13 @@
             </div>
             <div class="product-card">
                 <div class="product-img">🇰🇿</div>
-                <div class="product-name">Telegram (Казахстан)</div>
+                <div class="product-name">Telegram (КЗ)</div>
                 <div class="product-price">300 ₽</div>
                 <button class="buy-btn" onclick="buy('TG KZ')">Купить</button>
             </div>
             <div class="product-card">
                 <div class="product-img">🇰🇿</div>
-                <div class="product-name">VK (Казахстан)</div>
+                <div class="product-name">VK (КЗ)</div>
                 <div class="product-price">250 ₽</div>
                 <button class="buy-btn" onclick="buy('VK KZ')">Купить</button>
             </div>
@@ -158,14 +126,14 @@
                 <img src="./IMG_0485.jpg" class="product-img" onerror="this.src='https://placeholder.com'">
                 <div class="product-name">Tinder / Galaxy</div>
                 <div class="product-price">Скоро</div>
-                <button class="buy-btn" style="background-color: #444;" onclick="tg.showAlert('Эта услуга появится совсем скоро!')">Ожидается</button>
+                <button class="buy-btn" style="background-color: #444;" onclick="tg.showAlert('Ожидайте поставку!')">Ожидается</button>
             </div>
         </div>
     </div>
 
-    <!-- ВТОРАЯ СТРАНИЦА: ПРОФИЛЬ -->
+    <!-- ПРОФИЛЬ -->
     <div id="profile-page" class="page">
-        <div class="header">
+        <div class="top-bar">
             <h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Личный кабинет</h1>
         </div>
         <div class="profile-container">
@@ -175,36 +143,27 @@
             <div id="user-id" style="font-size: 12px; color: #6c7883; margin-bottom: 20px;">ID: 00000000</div>
 
             <div class="section-card">
-                <div class="section-title">Ваш баланс</div>
+                <div style="font-size: 11px; opacity: 0.6; margin-bottom: 5px;">ВАШ БАЛАНС</div>
                 <div style="font-size: 28px; font-weight: bold; color: #64b5f6;">0.00 ₽</div>
-                <button class="buy-btn" style="width: 100%; margin-top: 15px;" onclick="tg.showAlert('Пополнение через бота будет доступно скоро!')">Пополнить</button>
+                <button class="buy-btn" style="width: 100%; margin-top: 10px;" onclick="tg.showAlert('Пополнение через бота')">Пополнить</button>
             </div>
 
             <div class="section-card">
-                <div class="section-title">Партнерская программа</div>
-                <p style="font-size: 13px; margin: 0 0 12px 0; opacity: 0.8;">Приглашай друзей и получай 10% от их покупок!</p>
                 <button class="buy-btn" style="width: 100%; background-color: #2ecc71;" onclick="copyRef()">Пригласить друга</button>
             </div>
 
             <div class="section-card">
-                <div class="section-title">Промокод</div>
-                <input type="text" id="promo-input" class="promo-input" placeholder="Введите код">
+                <input type="text" id="promo" class="promo-input" placeholder="Промокод">
                 <button class="buy-btn" style="width: 100%;" onclick="usePromo()">Активировать</button>
             </div>
         </div>
     </div>
 
-    <!-- МЕНЮ НАВИГАЦИИ -->
+    <!-- МЕНЮ -->
     <div class="nav-bar">
-        <div id="nav-main" class="nav-item active" onclick="showPage('main')">
-            <span class="nav-icon">🏠</span>Главная
-        </div>
-        <div class="nav-item" onclick="tg.showAlert('Раздел в разработке')">
-            <span class="nav-icon">🛒</span>Корзина
-        </div>
-        <div id="nav-profile" class="nav-item" onclick="showPage('profile')">
-            <span class="nav-icon">👤</span>Профиль
-        </div>
+        <div id="nav-main" class="nav-item active" onclick="showPage('main')">🏠<br>Главная</div>
+        <div class="nav-item" onclick="tg.showAlert('Корзина пуста')">🛒<br>Корзина</div>
+        <div id="nav-profile" class="nav-item" onclick="showPage('profile')">👤<br>Профиль</div>
     </div>
 
     <script>
@@ -212,57 +171,36 @@
         tg.ready();
         tg.expand();
 
-        // ФУНКЦИЯ ПОЛУЧЕНИЯ ДАННЫХ ЮЗЕРА
         function renderUser() {
             const user = tg.initDataUnsafe?.user;
             if (user) {
                 document.getElementById("user-name").innerText = user.first_name + (user.last_name ? " " + user.last_name : "");
-                document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "Ник не установлен";
-                document.getElementById("user-id").innerText = "Ваш ID: " + user.id;
-
-                if (user.photo_url) {
-                    document.getElementById("user-photo").src = user.photo_url;
-                } else {
-                    document.getElementById("user-photo").src = `https://ui-avatars.com{encodeURIComponent(user.first_name)}&background=3498db&color=fff`;
-                }
-            } else {
-                // Если Telegram еще не передал данные, пробуем еще раз через полсекунды
-                setTimeout(renderUser, 500);
-            }
+                document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "Никнейм не задан";
+                document.getElementById("user-id").innerText = "ID: " + user.id;
+                if (user.photo_url) { document.getElementById("user-photo").src = user.photo_url; }
+                else { document.getElementById("user-photo").src = `https://ui-avatars.com{encodeURIComponent(user.first_name)}&background=3498db&color=fff`; }
+            } else { setTimeout(renderUser, 500); }
         }
         renderUser();
 
-        // ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
-        function showPage(pageName) {
-            const mainP = document.getElementById('main-page');
-            const profP = document.getElementById('profile-page');
-            const navM = document.getElementById('nav-main');
-            const navP = document.getElementById('nav-profile');
-
-            if (pageName === 'main') {
-                mainP.style.display = 'block'; profP.style.display = 'none';
-                navM.classList.add('active'); navP.classList.remove('active');
-            } else {
-                mainP.style.display = 'none'; profP.style.display = 'block';
-                navM.classList.remove('active'); navP.classList.add('active');
-            }
+        function showPage(p) {
+            document.getElementById('main-page').style.display = p === 'main' ? 'block' : 'none';
+            document.getElementById('profile-page').style.display = p === 'profile' ? 'block' : 'none';
+            document.getElementById('nav-main').classList.toggle('active', p === 'main');
+            document.getElementById('nav-profile').classList.toggle('active', p === 'profile');
         }
 
-        // ФУНКЦИИ КНОПОК
         function copyRef() {
-            const userId = tg.initDataUnsafe?.user?.id || "0";
-            // В ссылке ниже замени 'FloydShop_bot' на реальный юзернейм своего бота
-            tg.showAlert("Твоя ссылка для друга (скопируй):\nhttps://t.me" + userId);
+            const id = tg.initDataUnsafe?.user?.id || "0";
+            tg.showAlert("Твоя ссылка: https://t.me" + id);
         }
 
         function usePromo() {
-            const code = document.getElementById('promo-input').value;
-            tg.showAlert(code ? "Промокод '" + code + "' не найден или истек" : "Сначала введи промокод!");
+            const c = document.getElementById('promo').value;
+            tg.showAlert(c ? "Промокод '" + c + "' не найден" : "Введи код");
         }
 
-        function buy(item) {
-            tg.sendData("Купить: " + item);
-        }
+        function buy(i) { tg.sendData("Купить: " + i); }
     </script>
 </body>
 </html>
