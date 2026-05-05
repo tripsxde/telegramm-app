@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: #17212b; /* Глубокий темно-синий */
+            background-color: #17212b;
             color: #ffffff;
             margin: 0;
             padding: 0;
@@ -50,7 +50,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
+            font-size: 24px;
+            font-weight: bold;
         }
 
         .product-name {
@@ -102,33 +103,30 @@
     </div>
 
     <div class="product-grid">
-        <!-- Товар 1 -->
         <div class="product-card">
-            <div class="product-img">🇺🇸</div>
+            <div class="product-img">US</div>
             <div class="product-name">Telegram (США)</div>
             <div class="product-price">200 ₽</div>
             <button class="buy-btn" onclick="buy('TG USA')">Купить</button>
         </div>
 
-        <!-- Товар 2 -->
         <div class="product-card">
-            <div class="product-img">🇰🇿</div>
+            <div class="product-img">KZ</div>
             <div class="product-name">Telegram (Казахстан)</div>
             <div class="product-price">300 ₽</div>
             <button class="buy-btn" onclick="buy('TG KZ')">Купить</button>
         </div>
 
-        <!-- Товар 3 -->
         <div class="product-card">
-            <div class="product-img">🇰🇿</div>
+            <div class="product-img">KZ</div>
             <div class="product-name">VK (Казахстан)</div>
             <div class="product-price">250 ₽</div>
             <button class="buy-btn" onclick="buy('VK KZ')">Купить</button>
         </div>
 
-        <!-- Товар 4 (С ТВОЕЙ КАРТИНКОЙ) -->
         <div class="product-card">
-            <img src="img_4075.jpg" class="product-img">
+            <!-- Тут теперь правильное название файла -->
+            <img src="./IMG_0485.jpg" class="product-img" onerror="this.src='https://placeholder.com'">
             <div class="product-name">Tinder / Galaxy</div>
             <div class="product-price">Скоро</div>
             <button class="buy-btn" style="background-color: #444;" onclick="tg.showAlert('Эта услуга появится скоро!')">Ожидается</button>
