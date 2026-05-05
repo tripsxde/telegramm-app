@@ -26,19 +26,19 @@
             background-color: #17212b;
         }
 
-        /* Улучшенный баннер: высота 160px и фокус на левую часть */
         .banner-container {
             width: 100%;
-            height: 160px;
+            height: 140px;
             overflow: hidden;
             cursor: pointer;
             border-bottom: 2px solid #242f3d;
+            margin-top: 10px;
         }
         .banner-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: 5% center; /* Сдвигаем еще левее, чтобы было видно "23" */
+            object-position: 5% 70%;
             display: block;
         }
 
@@ -71,7 +71,6 @@
             border: none; border-radius: 6px; padding: 8px; font-weight: bold; cursor: pointer;
         }
 
-        /* Корзина */
         .cart-item {
             background: #242f3d;
             margin: 10px;
@@ -82,12 +81,10 @@
             align-items: center;
         }
 
-        /* Профиль */
         .profile-container { display: flex; flex-direction: column; align-items: center; padding: 20px; }
         .user-avatar { width: 80px; height: 80px; border-radius: 50%; border: 2px solid #3498db; margin-bottom: 12px; object-fit: cover; background: #242f3d; }
         .section-card { background-color: #242f3d; width: 100%; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-sizing: border-box; text-align: center; }
 
-        /* Навигация */
         .nav-bar { position: fixed; bottom: 0; width: 100%; background-color: #17212b; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #242f3d; z-index: 100; }
         .nav-item { text-align: center; font-size: 10px; color: #6c7883; cursor: pointer; }
         .nav-item.active { color: #3498db; }
@@ -95,7 +92,6 @@
 </head>
 <body>
 
-    <!-- МАГАЗИН -->
     <div id="main-page" class="page active-page">
         <div class="top-bar">
             <span>☰</span>
@@ -135,19 +131,15 @@
         </div>
     </div>
 
-    <!-- КОРЗИНА -->
     <div id="cart-page" class="page">
         <div class="top-bar"><h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Корзина</h1></div>
-        <div id="cart-items-list">
-            <!-- Сюда будут добавляться товары -->
-        </div>
+        <div id="cart-items-list"></div>
         <div class="section-card" style="margin: 10px;">
             <div style="font-size: 18px; margin-bottom: 10px;">Итого: <span id="total-price">0</span> ₽</div>
             <button class="buy-btn" style="width: 100%; background-color: #2ecc71;" onclick="checkout()">Оформить заказ</button>
         </div>
     </div>
 
-    <!-- ПРОФИЛЬ -->
     <div id="profile-page" class="page">
         <div class="top-bar"><h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Профиль</h1></div>
         <div class="profile-container">
@@ -155,7 +147,6 @@
             <div id="user-name" style="font-size: 20px; font-weight: bold;">Загрузка...</div>
             <div id="user-nick" style="color: #3498db;">@username</div>
             <div id="user-id" style="font-size: 12px; color: #6c7883; margin-top: 5px;">ID: 00000000</div>
-            
             <div class="section-card" style="margin-top: 20px;">
                 <div style="font-size: 11px; opacity: 0.6;">БАЛАНС</div>
                 <div style="font-size: 28px; font-weight: bold; color: #64b5f6;">0.00 ₽</div>
@@ -164,7 +155,6 @@
         </div>
     </div>
 
-    <!-- МЕНЮ -->
     <div class="nav-bar">
         <div id="nav-main" class="nav-item active" onclick="showPage('main')">🏠<br>Главная</div>
         <div id="nav-cart" class="nav-item" onclick="showPage('cart')">🛒<br>Корзина (<span id="cart-count">0</span>)</div>
@@ -233,4 +223,7 @@
         }
     </script>
 </body>
-</html>
+</html>'''
+Path('output').mkdir(exist_ok=True)
+Path('output/telegram_app_edited.html').write_text(html, encoding='utf-8')
+print('saved')
