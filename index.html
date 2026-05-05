@@ -3,19 +3,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- ГЛАВНЫЙ СКРИПТ TELEGRAM -->
+    <!-- Подключаем скрипт Telegram -->
     <script src="https://telegram.org"></script>
     <style>
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: #17212b;
+            background-color: #17212b; /* Глубокий темно-синий как на скрине */
             color: #ffffff;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
 
-        /* Плавное появление страниц */
+        /* Анимация переключения страниц */
         .page {
             display: none; 
             padding-bottom: 80px;
@@ -25,18 +25,17 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+        /* Шапка */
         .header {
             padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             background-color: #17212b;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            position: sticky; top: 0; z-index: 10;
         }
 
-        /* Витрина */
+        /* Витрина товаров */
         .product-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -53,50 +52,106 @@
         }
 
         .product-img {
-            width: 100%; height: 100px; border-radius: 8px; margin-bottom: 10px;
-            object-fit: cover; background: #2b3745; display: flex;
-            align-items: center; justify-content: center; font-size: 24px;
+            width: 100%;
+            height: 100px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            object-fit: cover;
+            background: #2b3745;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        .product-name { font-size: 13px; font-weight: 500; margin-bottom: 5px; height: 32px; overflow: hidden; }
-        .product-price { font-size: 15px; font-weight: bold; color: #64b5f6; }
+        .product-name { font-size: 13px; font-weight: 500; margin-bottom: 5px; height: 35px; overflow: hidden; }
+        .product-price { font-size: 16px; font-weight: bold; color: #64b5f6; }
 
         .buy-btn {
-            margin-top: 10px; background-color: #3498db; color: white;
-            border: none; border-radius: 6px; padding: 8px; font-weight: bold; cursor: pointer;
+            margin-top: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        /* Профиль */
+        /* Стили профиля */
         .profile-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 20px;
+            padding: 20px;
         }
-        .user-avatar {
-            width: 100px; height: 100px; border-radius: 50%;
-            background-color: #242f3d; margin-bottom: 15px;
-            border: 3px solid #3498db; object-fit: cover;
-        }
-        .user-name { font-size: 22px; font-weight: bold; margin-bottom: 5px; text-align: center; }
-        .user-nick { font-size: 14px; color: #3498db; margin-bottom: 10px; }
-        .user-id { font-size: 13px; color: #6c7883; margin-bottom: 20px; }
-        
-        .balance-card {
-            background-color: #242f3d;
-            width: 100%; border-radius: 15px; padding: 20px;
-            text-align: center; box-sizing: border-box;
-        }
-        .balance-amount { font-size: 32px; font-weight: bold; color: #64b5f6; margin-top: 10px; }
 
-        /* Меню навигации */
-        .nav-bar {
-            position: fixed; bottom: 0; width: 100%;
-            background-color: #17212b; display: flex;
-            justify-content: space-around; padding: 10px 0;
-            border-top: 1px solid #242f3d; z-index: 100;
+        .user-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 2px solid #3498db;
+            margin-bottom: 12px;
+            object-fit: cover;
         }
-        .nav-item { text-align: center; font-size: 10px; color: #6c7883; cursor: pointer; }
+
+        .user-name { font-size: 20px; font-weight: bold; margin-bottom: 2px; }
+        .user-nick { font-size: 14px; color: #3498db; margin-bottom: 5px; }
+        .user-id { font-size: 12px; color: #6c7883; margin-bottom: 20px; }
+
+        /* Карточки разделов в профиле */
+        .section-card {
+            background-color: #242f3d;
+            width: 100%;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 11px;
+            opacity: 0.6;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+        
+        .promo-input {
+            width: 100%;
+            padding: 12px;
+            background: #17212b;
+            border: 1px solid #3498db;
+            border-radius: 8px;
+            color: white;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Нижнее меню */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #17212b;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #242f3d;
+            z-index: 100;
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 10px;
+            color: #6c7883;
+            cursor: pointer;
+        }
+
         .nav-item.active { color: #3498db; }
         .nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
     </style>
@@ -111,14 +166,30 @@
             <span>🔍</span>
         </div>
         <div class="product-grid">
-            <div class="product-card"><div class="product-img">US</div><div class="product-name">Telegram (США)</div><div class="product-price">200 ₽</div><button class="buy-btn" onclick="buy('TG USA')">Купить</button></div>
-            <div class="product-card"><div class="product-img">KZ</div><div class="product-name">Telegram (Казахстан)</div><div class="product-price">300 ₽</div><button class="buy-btn" onclick="buy('TG KZ')">Купить</button></div>
-            <div class="product-card"><div class="product-img">KZ</div><div class="product-name">VK (Казахстан)</div><div class="product-price">250 ₽</div><button class="buy-btn" onclick="buy('VK KZ')">Купить</button></div>
             <div class="product-card">
+                <div class="product-img">🇺🇸</div>
+                <div class="product-name">Telegram (США)</div>
+                <div class="product-price">200 ₽</div>
+                <button class="buy-btn" onclick="buy('TG USA')">Купить</button>
+            </div>
+            <div class="product-card">
+                <div class="product-img">🇰🇿</div>
+                <div class="product-name">Telegram (КЗ)</div>
+                <div class="product-price">300 ₽</div>
+                <button class="buy-btn" onclick="buy('TG KZ')">Купить</button>
+            </div>
+            <div class="product-card">
+                <div class="product-img">🇰🇿</div>
+                <div class="product-name">VK (КЗ)</div>
+                <div class="product-price">250 ₽</div>
+                <button class="buy-btn" onclick="buy('VK KZ')">Купить</button>
+            </div>
+            <div class="product-card">
+                <!-- Файл IMG_0485.jpg должен лежать в твоем GitHub -->
                 <img src="./IMG_0485.jpg" class="product-img" onerror="this.src='https://placeholder.com'">
                 <div class="product-name">Tinder / Galaxy</div>
                 <div class="product-price">Скоро</div>
-                <button class="buy-btn" style="background-color: #444;" onclick="tg.showAlert('Эта услуга появится скоро!')">Ожидается</button>
+                <button class="buy-btn" style="background-color: #444;" onclick="tg.showAlert('Эта услуга появится совсем скоро!')">Ожидается</button>
             </div>
         </div>
     </div>
@@ -129,25 +200,42 @@
             <h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Личный кабинет</h1>
         </div>
         <div class="profile-container">
+            <!-- Аватарка -->
             <img id="user-photo" class="user-avatar" src="https://ui-avatars.com" alt="Avatar">
+            
             <div id="user-name" class="user-name">Поиск данных...</div>
             <div id="user-nick" class="user-nick">@username</div>
             <div id="user-id" class="user-id">ID: 00000000</div>
             
-            <div class="balance-card">
-                <div style="font-size: 12px; opacity: 0.7; letter-spacing: 1px;">МОЙ БАЛАНС</div>
-                <div class="balance-amount">0.00 ₽</div>
-                <button class="buy-btn" style="margin-top: 15px; width: 80%;" onclick="tg.showAlert('Пополнение в разработке')">Пополнить</button>
+            <!-- Блок Баланса -->
+            <div class="section-card">
+                <div class="section-title">Ваш баланс</div>
+                <div style="font-size: 28px; font-weight: bold; color: #64b5f6;">0.00 ₽</div>
+                <button class="buy-btn" style="width: 100%; margin-top: 15px;" onclick="tg.showAlert('Пополнение через бота будет доступно скоро!')">Пополнить</button>
+            </div>
+
+            <!-- Блок Рефералов -->
+            <div class="section-card">
+                <div class="section-title">Партнерская программа</div>
+                <p style="font-size: 13px; margin: 0 0 12px 0; opacity: 0.8;">Получай 10% от покупок друзей по твоей ссылке!</p>
+                <button class="buy-btn" style="width: 100%; background-color: #2ecc71;" onclick="copyRef()">Пригласить друга</button>
+            </div>
+
+            <!-- Блок Промокода -->
+            <div class="section-card">
+                <div class="section-title">Активация бонуса</div>
+                <input type="text" id="promo-field" class="promo-input" placeholder="Введите промокод">
+                <button class="buy-btn" style="width: 100%;" onclick="usePromo()">Активировать</button>
             </div>
         </div>
     </div>
 
-    <!-- МЕНЮ -->
+    <!-- НИЖНЯЯ НАВИГАЦИЯ -->
     <div class="nav-bar">
         <div id="nav-main" class="nav-item active" onclick="showPage('main')">
             <span class="nav-icon">🏠</span>Главная
         </div>
-        <div class="nav-item" onclick="tg.showAlert('Корзина пока пуста')">
+        <div class="nav-item" onclick="tg.showAlert('Корзина пуста')">
             <span class="nav-icon">🛒</span>Корзина
         </div>
         <div id="nav-profile" class="nav-item" onclick="showPage('profile')">
@@ -160,61 +248,59 @@
         tg.ready();
         tg.expand();
 
-        // ФУНКЦИЯ ПОЛУЧЕНИЯ ДАННЫХ ЮЗЕРА
+        // ФУНКЦИЯ ЗАПОЛНЕНИЯ ПРОФИЛЯ
         function renderUser() {
-            // Пытаемся достать данные напрямую
             const user = tg.initDataUnsafe?.user;
-
             if (user) {
-                // Имя и Фамилия
                 document.getElementById("user-name").innerText = user.first_name + (user.last_name ? " " + user.last_name : "");
-                
-                // Юзернейм
-                document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "Никнейм не задан";
-                
-                // ID
-                document.getElementById("user-id").innerText = "Ваш ID: " + user.id;
+                document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "Ник не установлен";
+                document.getElementById("user-id").innerText = "ID: " + user.id;
 
-                // Фотография
                 if (user.photo_url) {
                     document.getElementById("user-photo").src = user.photo_url;
                 } else {
-                    // Генерируем аватарку с первой буквой имени, если фото скрыто
                     document.getElementById("user-photo").src = `https://ui-avatars.com{encodeURIComponent(user.first_name)}&background=3498db&color=fff`;
                 }
             } else {
-                // Если Telegram еще не передал данные, пробуем еще раз через 300мс
-                setTimeout(renderUser, 300);
+                // Если данные не пришли сразу, пробуем еще раз
+                setTimeout(renderUser, 500);
             }
         }
-
-        // Запускаем процесс распознавания юзера
         renderUser();
 
         // ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
         function showPage(pageName) {
-            const mainPage = document.getElementById('main-page');
-            const profilePage = document.getElementById('profile-page');
-            const navMain = document.getElementById('nav-main');
-            const navProfile = document.getElementById('nav-profile');
+            const mainP = document.getElementById('main-page');
+            const profP = document.getElementById('profile-page');
+            const navM = document.getElementById('nav-main');
+            const navP = document.getElementById('nav-profile');
 
             if (pageName === 'main') {
-                mainPage.style.display = 'block';
-                profilePage.style.display = 'none';
-                navMain.classList.add('active');
-                navProfile.classList.remove('active');
-            } else if (pageName === 'profile') {
-                mainPage.style.display = 'none';
-                profilePage.style.display = 'block';
-                navMain.classList.remove('active');
-                navProfile.classList.add('active');
+                mainP.classList.add('active-page'); profP.classList.remove('active-page');
+                navM.classList.add('active'); navP.classList.remove('active');
+            } else {
+                mainP.classList.remove('active-page'); profP.classList.add('active-page');
+                navM.classList.remove('active'); navP.classList.add('active');
             }
         }
 
+        // КНОПКИ ДЕЙСТВИЙ
         function buy(item) {
-            tg.sendData("Заказ: " + item);
+            tg.sendData("Купить: " + item);
+        }
+
+        function copyRef() {
+            const userId = tg.initDataUnsafe?.user?.id || "0";
+            // Замени 'FloydShop_bot' на реальный юзернейм своего бота
+            const link = "https://t.me" + userId;
+            tg.showAlert("Твоя ссылка (скопируй её):\n" + link);
+        }
+
+        function usePromo() {
+            const code = document.getElementById('promo-field').value;
+            if(code) { tg.showAlert("Промокод '" + code + "' не найден"); }
+            else { tg.showAlert("Сначала введи код!"); }
         }
     </script>
 </body>
 </html>
-
