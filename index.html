@@ -18,7 +18,7 @@
         .active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Поиск и Заголовок в самом верху */
+        /* Шапка с названием и поиском */
         .top-bar {
             padding: 15px;
             display: flex;
@@ -27,10 +27,10 @@
             background-color: #17212b;
         }
 
-        /* Баннер ТЕПЕРЬ НИЖЕ ПОИСКА */
+        /* Баннер: Смещаем влево, чтобы было видно "23" и девочку */
         .banner-container {
             width: 100%;
-            height: 140px;
+            height: 150px;
             overflow: hidden;
             cursor: pointer;
             border-bottom: 2px solid #242f3d;
@@ -40,6 +40,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            /* Смещение картинки: влево (left) */
+            object-position: left center; 
             display: block;
         }
 
@@ -73,7 +75,7 @@
             border: none; border-radius: 6px; padding: 8px; font-weight: bold; cursor: pointer;
         }
 
-        /* Профиль */
+        /* Личный кабинет */
         .profile-container { display: flex; flex-direction: column; align-items: center; padding: 20px; }
         .user-avatar { width: 90px; height: 90px; border-radius: 50%; border: 2px solid #3498db; margin-bottom: 12px; object-fit: cover; background: #242f3d; }
         .user-name { font-size: 20px; font-weight: bold; margin-bottom: 2px; text-align: center; }
@@ -81,7 +83,7 @@
         .section-card { background-color: #242f3d; width: 100%; border-radius: 15px; padding: 15px; margin-bottom: 15px; box-sizing: border-box; text-align: center; }
         .promo-input { width: 100%; padding: 12px; background: #17212b; border: 1px solid #3498db; border-radius: 8px; color: white; box-sizing: border-box; margin-bottom: 10px; text-align: center; }
 
-        /* Навигация */
+        /* Нижнее меню */
         .nav-bar { position: fixed; bottom: 0; width: 100%; background-color: #17212b; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #242f3d; z-index: 100; }
         .nav-item { text-align: center; font-size: 10px; color: #6c7883; cursor: pointer; }
         .nav-item.active { color: #3498db; }
@@ -89,9 +91,8 @@
 </head>
 <body>
 
-    <!-- МАГАЗИН -->
+    <!-- СТРАНИЦА МАГАЗИНА -->
     <div id="main-page" class="page active-page">
-        <!-- ПОИСК ТЕПЕРЬ СВЕРХУ -->
         <div class="top-bar">
             <span>☰</span>
             <h1 style="font-size: 18px; margin: 0;">23 | rei</h1>
@@ -99,7 +100,7 @@
         </div>
 
         <!-- КЛИКАБЕЛЬНЫЙ БАННЕР -->
-        <div class="banner-container" onclick="window.location.href='https://t.me'">
+        <div class="banner-container" onclick="tg.openTelegramLink('https://t.me/+-7dgCn7fPB8wYTky')">
             <img src="./87712C11-DC80-474C-B501-3BB3E86C794E.jpg" class="banner-img" onerror="this.src='https://placeholder.com'">
         </div>
 
@@ -131,7 +132,7 @@
         </div>
     </div>
 
-    <!-- ПРОФИЛЬ -->
+    <!-- СТРАНИЦА ПРОФИЛЯ -->
     <div id="profile-page" class="page">
         <div class="top-bar">
             <h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Личный кабинет</h1>
@@ -145,7 +146,7 @@
             <div class="section-card">
                 <div style="font-size: 11px; opacity: 0.6; margin-bottom: 5px;">ВАШ БАЛАНС</div>
                 <div style="font-size: 28px; font-weight: bold; color: #64b5f6;">0.00 ₽</div>
-                <button class="buy-btn" style="width: 100%; margin-top: 10px;" onclick="tg.showAlert('Пополнение через бота')">Пополнить</button>
+                <button class="buy-btn" style="width: 100%; margin-top: 10px;" onclick="tg.showAlert('Пополнение в разработке')">Пополнить</button>
             </div>
 
             <div class="section-card">
@@ -162,7 +163,6 @@
     <!-- МЕНЮ -->
     <div class="nav-bar">
         <div id="nav-main" class="nav-item active" onclick="showPage('main')">🏠<br>Главная</div>
-        <div class="nav-item" onclick="tg.showAlert('Корзина пуста')">🛒<br>Корзина</div>
         <div id="nav-profile" class="nav-item" onclick="showPage('profile')">👤<br>Профиль</div>
     </div>
 
@@ -197,7 +197,7 @@
 
         function usePromo() {
             const c = document.getElementById('promo').value;
-            tg.showAlert(c ? "Промокод '" + c + "' не найден" : "Введи код");
+            tg.showAlert(c ? "Код " + c + " не найден" : "Введи код");
         }
 
         function buy(i) { tg.sendData("Купить: " + i); }
