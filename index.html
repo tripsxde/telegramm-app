@@ -7,14 +7,13 @@
     <style>
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: #17212b; /* Темно-синий фон */
+            background-color: #17212b;
             color: #ffffff;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
 
-        /* Анимация появления страниц */
         .page {
             display: none; 
             padding-bottom: 80px;
@@ -24,7 +23,6 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Шапка сайта */
         .header {
             padding: 15px;
             display: flex;
@@ -36,7 +34,6 @@
             z-index: 10;
         }
 
-        /* Витрина товаров */
         .product-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -53,94 +50,55 @@
         }
 
         .product-img {
-            width: 100%;
-            height: 100px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            object-fit: cover;
-            background: #2b3745;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
+            width: 100%; height: 100px; border-radius: 8px; margin-bottom: 10px;
+            object-fit: cover; background: #2b3745; display: flex;
+            align-items: center; justify-content: center; font-size: 24px;
         }
 
-        .product-name { font-size: 14px; font-weight: 500; margin-bottom: 5px; height: 35px; overflow: hidden; }
-        .product-price { font-size: 16px; font-weight: bold; color: #64b5f6; }
+        .product-name { font-size: 13px; font-weight: 500; margin-bottom: 5px; height: 32px; overflow: hidden; }
+        .product-price { font-size: 15px; font-weight: bold; color: #64b5f6; }
 
         .buy-btn {
-            margin-top: 10px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 8px;
-            font-weight: bold;
-            cursor: pointer;
+            margin-top: 10px; background-color: #3498db; color: white;
+            border: none; border-radius: 6px; padding: 8px; font-weight: bold; cursor: pointer;
         }
 
-        /* Стили страницы профиля */
+        /* Стили профиля */
         .profile-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 40px 20px;
         }
-
         .user-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: #242f3d;
-            margin-bottom: 15px;
-            border: 3px solid #3498db;
-            object-fit: cover;
+            width: 100px; height: 100px; border-radius: 50%;
+            background-color: #242f3d; margin-bottom: 15px;
+            border: 3px solid #3498db; object-fit: cover;
         }
-
-        .user-name { font-size: 20px; font-weight: bold; margin-bottom: 2px; }
+        .user-name { font-size: 22px; font-weight: bold; margin-bottom: 5px; }
         .user-nick { font-size: 14px; color: #3498db; margin-bottom: 10px; }
-        .user-id { font-size: 12px; color: #6c7883; margin-bottom: 25px; }
-
+        .user-id { font-size: 14px; color: #6c7883; margin-bottom: 20px; }
+        
         .balance-card {
             background-color: #242f3d;
-            width: 100%;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            box-sizing: border-box;
+            width: 100%; border-radius: 15px; padding: 20px;
+            text-align: center; box-sizing: border-box;
         }
-
         .balance-amount { font-size: 32px; font-weight: bold; color: #64b5f6; margin-top: 10px; }
 
-        /* Нижнее меню навигации */
         .nav-bar {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #17212b;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 1px solid #242f3d;
-            z-index: 100;
+            position: fixed; bottom: 0; width: 100%;
+            background-color: #17212b; display: flex;
+            justify-content: space-around; padding: 10px 0;
+            border-top: 1px solid #242f3d; z-index: 100;
         }
-
-        .nav-item {
-            text-align: center;
-            font-size: 10px;
-            color: #6c7883;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
+        .nav-item { text-align: center; font-size: 10px; color: #6c7883; cursor: pointer; }
         .nav-item.active { color: #3498db; }
-        .nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
     </style>
 </head>
 <body>
 
-    <!-- СТРАНИЦА МАГАЗИНА -->
+    <!-- МАГАЗИН -->
     <div id="main-page" class="page active-page">
         <div class="header">
             <span>☰</span>
@@ -148,26 +106,10 @@
             <span>🔍</span>
         </div>
         <div class="product-grid">
+            <div class="product-card"><div class="product-img">US</div><div class="product-name">Telegram (США)</div><div class="product-price">200 ₽</div><button class="buy-btn" onclick="buy('TG USA')">Купить</button></div>
+            <div class="product-card"><div class="product-img">KZ</div><div class="product-name">Telegram (Казахстан)</div><div class="product-price">300 ₽</div><button class="buy-btn" onclick="buy('TG KZ')">Купить</button></div>
+            <div class="product-card"><div class="product-img">KZ</div><div class="product-name">VK (Казахстан)</div><div class="product-price">250 ₽</div><button class="buy-btn" onclick="buy('VK KZ')">Купить</button></div>
             <div class="product-card">
-                <div class="product-img">US</div>
-                <div class="product-name">Telegram (США)</div>
-                <div class="product-price">200 ₽</div>
-                <button class="buy-btn" onclick="buy('TG USA')">Купить</button>
-            </div>
-            <div class="product-card">
-                <div class="product-img">KZ</div>
-                <div class="product-name">Telegram (Казахстан)</div>
-                <div class="product-price">300 ₽</div>
-                <button class="buy-btn" onclick="buy('TG KZ')">Купить</button>
-            </div>
-            <div class="product-card">
-                <div class="product-img">KZ</div>
-                <div class="product-name">VK (Казахстан)</div>
-                <div class="product-price">250 ₽</div>
-                <button class="buy-btn" onclick="buy('VK KZ')">Купить</button>
-            </div>
-            <div class="product-card">
-                <!-- Картинка Рей (имя файла должно быть в репозитории) -->
                 <img src="./IMG_0485.jpg" class="product-img" onerror="this.src='https://placeholder.com'">
                 <div class="product-name">Tinder / Galaxy</div>
                 <div class="product-price">Скоро</div>
@@ -176,78 +118,64 @@
         </div>
     </div>
 
-    <!-- СТРАНИЦА ПРОФИЛЯ -->
+    <!-- ПРОФИЛЬ -->
     <div id="profile-page" class="page">
         <div class="header">
             <h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Личный кабинет</h1>
         </div>
         <div class="profile-container">
-            <!-- Аватарка (загружается автоматически) -->
             <img id="user-photo" class="user-avatar" src="https://ui-avatars.com" alt="Avatar">
-            
             <div id="user-name" class="user-name">Загрузка...</div>
             <div id="user-nick" class="user-nick">@username</div>
             <div id="user-id" class="user-id">ID: 00000000</div>
             
             <div class="balance-card">
-                <div style="font-size: 12px; opacity: 0.6; text-transform: uppercase;">Мой баланс</div>
+                <div style="font-size: 12px; opacity: 0.7;">ВАШ БАЛАНС</div>
                 <div class="balance-amount">0.00 ₽</div>
                 <button class="buy-btn" style="margin-top: 15px; width: 80%;" onclick="tg.showAlert('Пополнение в разработке')">Пополнить</button>
             </div>
         </div>
     </div>
 
-    <!-- НИЖНЯЯ НАВИГАЦИЯ -->
+    <!-- МЕНЮ -->
     <div class="nav-bar">
-        <div id="nav-main" class="nav-item active" onclick="showPage('main')">
-            <span class="nav-icon">🏠</span>Главная
-        </div>
-        <div class="nav-item" onclick="tg.showAlert('Корзина пуста')">
-            <span class="nav-icon">🛒</span>Корзина
-        </div>
-        <div id="nav-profile" class="nav-item" onclick="showPage('profile')">
-            <span class="nav-icon">👤</span>Профиль
-        </div>
+        <div id="nav-main" class="nav-item active" onclick="showPage('main')">🏠<br>Главная</div>
+        <div class="nav-item" onclick="tg.showAlert('Корзина пуста')">🛒<br>Корзина</div>
+        <div id="nav-profile" class="nav-item" onclick="showPage('profile')">👤<br>Профиль</div>
     </div>
 
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
 
-        // Заполнение данных профиля из Telegram
-        const user = tg.initDataUnsafe?.user;
-        if (user) {
-            document.getElementById("user-name").innerText = user.first_name + (user.last_name ? " " + user.last_name : "");
-            document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "Ник не скрыт";
-            document.getElementById("user-id").innerText = "ID: " + user.id;
+        function renderUser() {
+            const user = tg.initDataUnsafe?.user;
+            if (user) {
+                document.getElementById("user-name").innerText = user.first_name + (user.last_name ? " " + user.last_name : "");
+                document.getElementById("user-nick").innerText = user.username ? "@" + user.username : "Ник не задан";
+                document.getElementById("user-id").innerText = "ID: " + user.id;
 
-            // Пробуем подтянуть фото или создаем аватарку с первой буквой имени
-            if (user.photo_url) {
-                document.getElementById("user-photo").src = user.photo_url;
+                if (user.photo_url) {
+                    document.getElementById("user-photo").src = user.photo_url;
+                } else {
+                    document.getElementById("user-photo").src = `https://ui-avatars.com{user.first_name}&background=3498db&color=fff`;
+                }
             } else {
-                document.getElementById("user-photo").src = `https://ui-avatars.com{user.first_name}&background=3498db&color=fff`;
+                // Если данные еще не пришли, пробуем снова через 200мс
+                setTimeout(renderUser, 200);
             }
         }
 
-        // Переключение страниц
+        renderUser();
+
         function showPage(pageName) {
-            document.getElementById('main-page').classList.remove('active-page');
-            document.getElementById('profile-page').classList.remove('active-page');
-            document.getElementById('nav-main').classList.remove('active');
-            document.getElementById('nav-profile').classList.remove('active');
-
-            if (pageName === 'main') {
-                document.getElementById('main-page').classList.add('active-page');
-                document.getElementById('nav-main').classList.add('active');
-            } else if (pageName === 'profile') {
-                document.getElementById('profile-page').classList.add('active-page');
-                document.getElementById('nav-profile').classList.add('active');
-            }
+            document.getElementById('main-page').style.display = pageName === 'main' ? 'block' : 'none';
+            document.getElementById('profile-page').style.display = pageName === 'profile' ? 'block' : 'none';
+            document.getElementById('nav-main').classList.toggle('active', pageName === 'main');
+            document.getElementById('nav-profile').classList.toggle('active', pageName === 'profile');
         }
 
-        function buy(item) {
-            tg.sendData("Запрос на покупку: " + item);
-        }
+        function buy(item) { tg.sendData("Купить: " + item); }
     </script>
 </body>
 </html>
