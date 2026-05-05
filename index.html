@@ -2,51 +2,73 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <!-- Подключаем библиотеку Telegram -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://telegram.org"></script>
     <style>
         body {
-            /* Используем переменные темы Telegram, чтобы цвета подстраивались сами */
-            background-color: var(--tg-theme-bg-color);
-            color: var(--tg-theme-text-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
             font-family: sans-serif;
+            background-color: var(--tg-theme-secondary-bg-color);
+            color: var(--tg-theme-text-color);
+            margin: 0;
+            padding: 20px;
         }
+        .container { display: flex; flex-direction: column; gap: 15px; }
+        .card {
+            background-color: var(--tg-theme-bg-color);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .card h3 { margin: 0 0 10px 0; font-size: 18px; }
+        .card p { margin: 0 0 15px 0; opacity: 0.8; font-size: 14px; }
+        .price { font-weight: bold; color: var(--tg-theme-button-color); }
         button {
-            padding: 15px 30px;
+            width: 100%;
+            padding: 10px;
             background-color: var(--tg-theme-button-color);
             color: var(--tg-theme-button-text-color);
             border: none;
-            border-radius: 10px;
-            font-size: 18px;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>Привет, <span id="username"></span>!</h1>
-    <p>Это твой личный кабинет</p>
-    <button onclick="sendData()">Отправить данные боту</button>
+    <div class="container">
+        <h2>Наши услуги</h2>
+        
+        <!-- Услуга 1 -->
+        <div class="card">
+            <h3>Разработка ботов</h3>
+            <p>Создадим крутого бота любой сложности на Python.</p>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="price">от 5 000 ₽</span>
+                <button onclick="order('Разработка ботов')">Заказать</button>
+            </div>
+        </div>
+
+        <!-- Услуга 2 -->
+        <div class="card">
+            <h3>Оформление Mini App</h3>
+            <p>Сделаем красивый интерфейс для вашего приложения.</p>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="price">от 3 000 ₽</span>
+                <button onclick="order('Оформление Mini App')">Заказать</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Инициализация Telegram WebApp
         let tg = window.Telegram.WebApp;
-        tg.expand(); // Развернуть на весь экран
+        tg.expand();
 
-        // Выводим имя пользователя из данных Telegram
-        document.getElementById("username").innerText = tg.initDataUnsafe.user.first_name;
-
-        // Функция для отправки данных обратно в чат
-        function sendData() {
-            tg.sendData("Пользователь нажал на кнопку в приложении!"); 
-            // Это закроет приложение и отправит текст боту
+        function order(serviceName) {
+            // Отправляем данные боту и закрываем приложение
+            tg.sendData("Заказ: " + serviceName);
         }
     </script>
 </body>
 </html>
+
 
