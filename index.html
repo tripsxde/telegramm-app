@@ -5,77 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="https://telegram.org"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: #17212b;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background-color: #17212b; color: #ffffff; margin: 0; padding: 0; overflow-x: hidden; }
         .page { display: none; padding-bottom: 80px; animation: fadeIn 0.2s ease; }
         .active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .top-bar {
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #17212b;
-        }
-
-        /* БАННЕР */
-        .banner-container {
-            width: 100%;
-            height: auto;
-            cursor: pointer;
-            background-color: #ffffff;
-            border-bottom: 2px solid #242f3d;
-        }
-        .banner-img {
-            width: 100%;
-            display: block;
-            height: auto;
-        }
-
-        /* Витрина */
-        .product-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            padding: 12px;
-        }
-
-        .product-card {
-            background-color: #242f3d;
-            border-radius: 12px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-img {
-            width: 100%; height: 100px; border-radius: 8px; margin-bottom: 10px;
-            object-fit: cover; background: #2b3745; display: flex;
-            align-items: center; justify-content: center; font-size: 24px;
-        }
-
+        .top-bar { padding: 15px; display: flex; justify-content: space-between; align-items: center; background-color: #17212b; }
+        .banner-container { width: 100%; height: auto; cursor: pointer; background-color: #ffffff; border-bottom: 2px solid #242f3d; }
+        .banner-img { width: 100%; display: block; height: auto; }
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px; }
+        .product-card { background-color: #242f3d; border-radius: 12px; padding: 10px; display: flex; flex-direction: column; }
+        .product-img { width: 100%; height: 100px; border-radius: 8px; margin-bottom: 10px; object-fit: cover; background: #2b3745; display: flex; align-items: center; justify-content: center; font-size: 24px; }
         .product-name { font-size: 13px; font-weight: 500; margin-bottom: 5px; height: 35px; overflow: hidden; }
         .product-price { font-size: 16px; font-weight: bold; color: #64b5f6; }
-
-        .buy-btn {
-            margin-top: 10px; background-color: #3498db; color: white;
-            border: none; border-radius: 6px; padding: 8px; font-weight: bold; cursor: pointer;
-        }
-
-        .cart-item {
-            background: #242f3d; margin: 10px; padding: 15px;
-            border-radius: 10px; display: flex; justify-content: space-between; align-items: center;
-        }
-
-        /* Навигация */
+        .buy-btn { margin-top: 10px; background-color: #3498db; color: white; border: none; border-radius: 6px; padding: 8px; font-weight: bold; cursor: pointer; }
+        .cart-item { background: #242f3d; margin: 10px; padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }
         .nav-bar { position: fixed; bottom: 0; width: 100%; background-color: #17212b; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #242f3d; z-index: 100; }
         .nav-item { text-align: center; font-size: 10px; color: #6c7883; cursor: pointer; }
         .nav-item.active { color: #3498db; }
@@ -83,7 +26,6 @@
 </head>
 <body>
 
-    <!-- МАГАЗИН -->
     <div id="main-page" class="page active-page">
         <div class="top-bar">
             <span>☰</span>
@@ -91,7 +33,6 @@
             <span onclick="tg.showAlert('Поиск скоро появится')">🔍</span>
         </div>
 
-        <!-- КЛИКАБЕЛЬНЫЙ БАННЕР -->
         <div class="banner-container" onclick="openChannel()">
             <img src="./87712C11-DC80-474C-B501-3BB3E86C794E.jpg" class="banner-img">
         </div>
@@ -124,7 +65,6 @@
         </div>
     </div>
 
-    <!-- КОРЗИНА -->
     <div id="cart-page" class="page">
         <div class="top-bar"><h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Корзина</h1></div>
         <div id="cart-items-list"></div>
@@ -134,7 +74,6 @@
         </div>
     </div>
 
-    <!-- ПРОФИЛЬ -->
     <div id="profile-page" class="page">
         <div class="top-bar"><h1 style="font-size: 18px; margin: 0; width: 100%; text-align: center;">Профиль</h1></div>
         <div style="display: flex; flex-direction: column; align-items: center; padding: 20px;">
@@ -145,7 +84,6 @@
         </div>
     </div>
 
-    <!-- МЕНЮ -->
     <div class="nav-bar">
         <div id="nav-main" class="nav-item active" onclick="showPage('main')">🏠<br>Главная</div>
         <div id="nav-cart" class="nav-item" onclick="showPage('cart')">🛒<br>Корзина (<span id="cart-count">0</span>)</div>
@@ -157,9 +95,7 @@
         tg.ready(); tg.expand();
         let cart = [];
 
-        // ФУНКЦИЯ ОТКРЫТИЯ КАНАЛА (ВСТАВЛЕНА СЮДА)
         function openChannel() {
-            // Этот метод принудительно открывает ссылку внутри Telegram
             tg.openTelegramLink('https://t.me/+-7dgCn7fPB8wYTky');
         }
 
@@ -209,4 +145,6 @@
         }
     </script>
 </body>
-</html>
+</html>'''
+Path('output/full_telegram_app.html').write_text(full_code, encoding='utf-8')
+print(full_code)
