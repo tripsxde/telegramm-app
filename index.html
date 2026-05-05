@@ -40,6 +40,7 @@
             height: auto;
         }
 
+        /* Витрина */
         .product-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -74,6 +75,7 @@
             border-radius: 10px; display: flex; justify-content: space-between; align-items: center;
         }
 
+        /* Навигация */
         .nav-bar { position: fixed; bottom: 0; width: 100%; background-color: #17212b; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #242f3d; z-index: 100; }
         .nav-item { text-align: center; font-size: 10px; color: #6c7883; cursor: pointer; }
         .nav-item.active { color: #3498db; }
@@ -155,8 +157,9 @@
         tg.ready(); tg.expand();
         let cart = [];
 
-        // Функция открытия ссылки на канал
+        // ФУНКЦИЯ ОТКРЫТИЯ КАНАЛА (ВСТАВЛЕНА СЮДА)
         function openChannel() {
+            // Этот метод принудительно открывает ссылку внутри Telegram
             tg.openTelegramLink('https://t.me/+-7dgCn7fPB8wYTky');
         }
 
